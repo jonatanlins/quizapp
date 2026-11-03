@@ -1,0 +1,804 @@
+{
+  "categories": [
+    {
+      "id": "ai-fundamentals",
+      "name": "AI Fundamentals",
+      "description": "Core concepts behind modern AI systems.",
+      "questionCount": 10
+    },
+    {
+      "id": "llm-applications",
+      "name": "LLM Applications",
+      "description": "Design and evaluate language-model applications.",
+      "questionCount": 10
+    },
+    {
+      "id": "ai-engineering",
+      "name": "AI Engineering",
+      "description": "Build, secure, and operate AI-powered software.",
+      "questionCount": 10
+    }
+  ],
+  "questions": [
+    {
+      "id": "ai-fundamentals-1",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does supervised learning use to train a model?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Labeled examples"
+        },
+        {
+          "id": "b",
+          "text": "Only unlabeled examples"
+        },
+        {
+          "id": "c",
+          "text": "Random outputs alone"
+        },
+        {
+          "id": "d",
+          "text": "A fixed set of rules"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Supervised learning learns from examples paired with target labels.",
+      "learnNote": "Training datasets can contain examples paired with expected outputs."
+    },
+    {
+      "id": "ai-fundamentals-2",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is overfitting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Performing well on training data but poorly on unseen data"
+        },
+        {
+          "id": "b",
+          "text": "Performing equally well on all datasets"
+        },
+        {
+          "id": "c",
+          "text": "Having too little training data stored"
+        },
+        {
+          "id": "d",
+          "text": "Using a model only once"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "An overfit model captures training-specific patterns that do not generalize.",
+      "learnNote": "Compare performance on the training set with held-out data."
+    },
+    {
+      "id": "ai-fundamentals-3",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is a feature in machine learning?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An input variable used by a model"
+        },
+        {
+          "id": "b",
+          "text": "The final model score"
+        },
+        {
+          "id": "c",
+          "text": "A server deployment"
+        },
+        {
+          "id": "d",
+          "text": "A training error message"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Features are input attributes used to make predictions.",
+      "learnNote": "Models use measurable properties of an example as inputs."
+    },
+    {
+      "id": "ai-fundamentals-4",
+      "categoryId": "ai-fundamentals",
+      "prompt": "Why reserve a test dataset?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To estimate performance on unseen examples"
+        },
+        {
+          "id": "b",
+          "text": "To train the model repeatedly"
+        },
+        {
+          "id": "c",
+          "text": "To store model weights"
+        },
+        {
+          "id": "d",
+          "text": "To guarantee zero errors"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A held-out test set provides an estimate of generalization.",
+      "learnNote": "Reliable evaluation needs data that did not guide model fitting."
+    },
+    {
+      "id": "ai-fundamentals-5",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does classification predict?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A discrete category"
+        },
+        {
+          "id": "b",
+          "text": "Only a continuous number"
+        },
+        {
+          "id": "c",
+          "text": "A database schema"
+        },
+        {
+          "id": "d",
+          "text": "A network address"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Classification assigns an example to a class or category.",
+      "learnNote": "Common prediction tasks distinguish categories from numeric quantities."
+    },
+    {
+      "id": "ai-fundamentals-6",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is inference?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using a trained model to generate a prediction"
+        },
+        {
+          "id": "b",
+          "text": "Labeling all training examples"
+        },
+        {
+          "id": "c",
+          "text": "Deleting a training set"
+        },
+        {
+          "id": "d",
+          "text": "Changing model architecture only"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Inference applies a trained model to new input.",
+      "learnNote": "A model has a training phase and a separate usage phase."
+    },
+    {
+      "id": "ai-fundamentals-7",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does a high false positive rate indicate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Many negative cases are incorrectly marked positive"
+        },
+        {
+          "id": "b",
+          "text": "Many positive cases are correctly detected"
+        },
+        {
+          "id": "c",
+          "text": "All labels are correct"
+        },
+        {
+          "id": "d",
+          "text": "The dataset has no negative cases"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A false positive is a negative example predicted as positive.",
+      "learnNote": "Consider errors made when predicting the positive class."
+    },
+    {
+      "id": "ai-fundamentals-8",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is a model parameter?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A learned numerical value used by the model"
+        },
+        {
+          "id": "b",
+          "text": "A user interface color"
+        },
+        {
+          "id": "c",
+          "text": "A test dataset label only"
+        },
+        {
+          "id": "d",
+          "text": "A deployment URL"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Parameters are values adjusted during training that affect model behavior.",
+      "learnNote": "Training adjusts numerical values inside a model."
+    },
+    {
+      "id": "ai-fundamentals-9",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does data leakage cause?",
+      "options": [
+        {
+          "id": "a",
+          "text": "An overly optimistic evaluation from unavailable information"
+        },
+        {
+          "id": "b",
+          "text": "An encrypted training set"
+        },
+        {
+          "id": "c",
+          "text": "A smaller model file"
+        },
+        {
+          "id": "d",
+          "text": "A guaranteed fair model"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Leakage allows information unavailable at prediction time to influence training or evaluation.",
+      "learnNote": "Separate information available at prediction time from future or test-set information."
+    },
+    {
+      "id": "ai-fundamentals-10",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is a common goal of regularization?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Improve generalization by constraining model complexity"
+        },
+        {
+          "id": "b",
+          "text": "Guarantee perfect training accuracy"
+        },
+        {
+          "id": "c",
+          "text": "Remove the need for validation"
+        },
+        {
+          "id": "d",
+          "text": "Replace all training examples"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Regularization discourages overly complex solutions that may overfit.",
+      "learnNote": "Generalization can improve when model complexity is controlled."
+    },
+    {
+      "id": "llm-applications-1",
+      "categoryId": "llm-applications",
+      "prompt": "What is a token in an LLM?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A unit of text processed by the model"
+        },
+        {
+          "id": "b",
+          "text": "A guaranteed whole word"
+        },
+        {
+          "id": "c",
+          "text": "A database password"
+        },
+        {
+          "id": "d",
+          "text": "A GPU device"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Tokens are units of text that can represent words, parts of words, or other text.",
+      "learnNote": "Text is split into units that are not always whole words."
+    },
+    {
+      "id": "llm-applications-2",
+      "categoryId": "llm-applications",
+      "prompt": "What is retrieval-augmented generation (RAG)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adding retrieved context to a model request"
+        },
+        {
+          "id": "b",
+          "text": "Retraining a model after every question"
+        },
+        {
+          "id": "c",
+          "text": "Removing context from a prompt"
+        },
+        {
+          "id": "d",
+          "text": "Storing only generated answers"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "RAG retrieves relevant information and supplies it as context for generation.",
+      "learnNote": "External documents can provide context at request time."
+    },
+    {
+      "id": "llm-applications-3",
+      "categoryId": "llm-applications",
+      "prompt": "What is a context window?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The amount of input and output a model can process together"
+        },
+        {
+          "id": "b",
+          "text": "A browser pop-up"
+        },
+        {
+          "id": "c",
+          "text": "The time required to train a model"
+        },
+        {
+          "id": "d",
+          "text": "A permanent database"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The context window limits the tokens considered in a model interaction.",
+      "learnNote": "Model interactions have a finite capacity measured in tokens."
+    },
+    {
+      "id": "llm-applications-4",
+      "categoryId": "llm-applications",
+      "prompt": "What is a hallucination?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A plausible but unsupported or false model output"
+        },
+        {
+          "id": "b",
+          "text": "A guaranteed citation"
+        },
+        {
+          "id": "c",
+          "text": "An input validation rule"
+        },
+        {
+          "id": "d",
+          "text": "An encryption method"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A model can generate fluent content that is incorrect or unsupported.",
+      "learnNote": "Fluent output is not necessarily factual."
+    },
+    {
+      "id": "llm-applications-5",
+      "categoryId": "llm-applications",
+      "prompt": "Why validate structured model output?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Generated output can violate the expected schema"
+        },
+        {
+          "id": "b",
+          "text": "Models always return valid JSON"
+        },
+        {
+          "id": "c",
+          "text": "Validation increases context size"
+        },
+        {
+          "id": "d",
+          "text": "It replaces access control"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Schema validation catches malformed or unexpected generated data.",
+      "learnNote": "A downstream application may require specific fields and types."
+    },
+    {
+      "id": "llm-applications-6",
+      "categoryId": "llm-applications",
+      "prompt": "What is prompt injection?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Untrusted content attempting to override application instructions"
+        },
+        {
+          "id": "b",
+          "text": "A method to compress model weights"
+        },
+        {
+          "id": "c",
+          "text": "A type of GPU"
+        },
+        {
+          "id": "d",
+          "text": "A deterministic search algorithm"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Prompt injection uses untrusted text to redirect model behavior.",
+      "learnNote": "Retrieved pages and user content can contain adversarial instructions."
+    },
+    {
+      "id": "llm-applications-7",
+      "categoryId": "llm-applications",
+      "prompt": "What is an embedding commonly used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Representing content as vectors for similarity search"
+        },
+        {
+          "id": "b",
+          "text": "Guaranteeing factual generation"
+        },
+        {
+          "id": "c",
+          "text": "Replacing authorization"
+        },
+        {
+          "id": "d",
+          "text": "Storing plaintext passwords"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Embeddings map content to numerical vectors useful for similarity comparisons.",
+      "learnNote": "Semantic search can compare numerical representations of content."
+    },
+    {
+      "id": "llm-applications-8",
+      "categoryId": "llm-applications",
+      "prompt": "What does temperature generally influence?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The randomness of generated outputs"
+        },
+        {
+          "id": "b",
+          "text": "The number of model parameters"
+        },
+        {
+          "id": "c",
+          "text": "The server clock"
+        },
+        {
+          "id": "d",
+          "text": "The size of the training dataset"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Temperature changes the sampling distribution and thus output variability.",
+      "learnNote": "Generation settings can influence how varied sampled outputs are."
+    },
+    {
+      "id": "llm-applications-9",
+      "categoryId": "llm-applications",
+      "prompt": "Why use a representative evaluation set?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To measure behavior on realistic tasks and edge cases"
+        },
+        {
+          "id": "b",
+          "text": "To guarantee a model never fails"
+        },
+        {
+          "id": "c",
+          "text": "To remove the need for monitoring"
+        },
+        {
+          "id": "d",
+          "text": "To hide poor results"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Representative evaluations reveal performance across tasks the application actually faces.",
+      "learnNote": "An evaluation should resemble the situations the application will encounter."
+    },
+    {
+      "id": "llm-applications-10",
+      "categoryId": "llm-applications",
+      "prompt": "What is the purpose of a system instruction?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To provide higher-level behavioral guidance to the model"
+        },
+        {
+          "id": "b",
+          "text": "To guarantee that all untrusted text is safe"
+        },
+        {
+          "id": "c",
+          "text": "To store embeddings permanently"
+        },
+        {
+          "id": "d",
+          "text": "To encrypt user messages"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "System instructions guide behavior but do not eliminate the need for security controls.",
+      "learnNote": "Applications can supply instructions at different levels of authority."
+    },
+    {
+      "id": "ai-engineering-1",
+      "categoryId": "ai-engineering",
+      "prompt": "Why set timeouts on model requests?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To bound how long an application waits"
+        },
+        {
+          "id": "b",
+          "text": "To guarantee every request succeeds"
+        },
+        {
+          "id": "c",
+          "text": "To eliminate rate limits"
+        },
+        {
+          "id": "d",
+          "text": "To remove the need for retries"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Timeouts bound waiting time and allow the application to recover or report failure.",
+      "learnNote": "External services can be slow or unavailable."
+    },
+    {
+      "id": "ai-engineering-2",
+      "categoryId": "ai-engineering",
+      "prompt": "What is an idempotent operation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "One that has the same intended effect when repeated"
+        },
+        {
+          "id": "b",
+          "text": "One that must always fail on retry"
+        },
+        {
+          "id": "c",
+          "text": "One that cannot be logged"
+        },
+        {
+          "id": "d",
+          "text": "One that requires a GPU"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Idempotency prevents repeated requests from creating duplicate effects.",
+      "learnNote": "Network retries can send the same operation more than once."
+    },
+    {
+      "id": "ai-engineering-3",
+      "categoryId": "ai-engineering",
+      "prompt": "How should an application handle model-generated tool arguments?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Validate and authorize them before executing the tool"
+        },
+        {
+          "id": "b",
+          "text": "Execute them without checks"
+        },
+        {
+          "id": "c",
+          "text": "Treat them as administrator instructions"
+        },
+        {
+          "id": "d",
+          "text": "Store them as secrets"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Model output is untrusted and requires validation and authorization before tool execution.",
+      "learnNote": "Generated tool calls can contain invalid or unauthorized arguments."
+    },
+    {
+      "id": "ai-engineering-4",
+      "categoryId": "ai-engineering",
+      "prompt": "What is a useful safeguard for API credentials?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep credentials server-side and out of source control"
+        },
+        {
+          "id": "b",
+          "text": "Embed them in browser JavaScript"
+        },
+        {
+          "id": "c",
+          "text": "Publish them in logs"
+        },
+        {
+          "id": "d",
+          "text": "Send them with every public response"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Server-side secret management reduces accidental exposure of credentials.",
+      "learnNote": "Anything shipped to a browser can be inspected by users."
+    },
+    {
+      "id": "ai-engineering-5",
+      "categoryId": "ai-engineering",
+      "prompt": "Why add observability to an AI application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To diagnose failures, latency, cost, and quality"
+        },
+        {
+          "id": "b",
+          "text": "To guarantee perfectly correct responses"
+        },
+        {
+          "id": "c",
+          "text": "To eliminate all testing"
+        },
+        {
+          "id": "d",
+          "text": "To avoid privacy considerations"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Metrics and traces help teams understand application behavior and investigate issues.",
+      "learnNote": "Production systems need visibility into behavior over time."
+    },
+    {
+      "id": "ai-engineering-6",
+      "categoryId": "ai-engineering",
+      "prompt": "What is a good retry strategy for transient rate limits?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bounded exponential backoff with jitter"
+        },
+        {
+          "id": "b",
+          "text": "Retry immediately without a limit"
+        },
+        {
+          "id": "c",
+          "text": "Retry only after deleting all data"
+        },
+        {
+          "id": "d",
+          "text": "Disable error handling"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Bounded backoff and jitter reduce synchronized retry load.",
+      "learnNote": "Repeated immediate retries can amplify an overloaded service."
+    },
+    {
+      "id": "ai-engineering-7",
+      "categoryId": "ai-engineering",
+      "prompt": "What should be done before logging user prompts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Apply data minimization and protect sensitive information"
+        },
+        {
+          "id": "b",
+          "text": "Publish all prompts publicly"
+        },
+        {
+          "id": "c",
+          "text": "Assume prompts never contain secrets"
+        },
+        {
+          "id": "d",
+          "text": "Disable access control"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Prompt logs can contain sensitive data and should be minimized and protected.",
+      "learnNote": "User-provided text may include private information."
+    },
+    {
+      "id": "ai-engineering-8",
+      "categoryId": "ai-engineering",
+      "prompt": "What is a vector database commonly used for in RAG?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Finding embeddings similar to a query embedding"
+        },
+        {
+          "id": "b",
+          "text": "Authenticating every user automatically"
+        },
+        {
+          "id": "c",
+          "text": "Guaranteeing an answer is correct"
+        },
+        {
+          "id": "d",
+          "text": "Compiling frontend code"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Vector search retrieves items whose embeddings are close to a query embedding.",
+      "learnNote": "Retrieval can use distances between numerical representations."
+    },
+    {
+      "id": "ai-engineering-9",
+      "categoryId": "ai-engineering",
+      "prompt": "Why separate offline evaluation from production monitoring?",
+      "options": [
+        {
+          "id": "a",
+          "text": "They reveal different failure modes before and after deployment"
+        },
+        {
+          "id": "b",
+          "text": "They are identical and redundant"
+        },
+        {
+          "id": "c",
+          "text": "Monitoring eliminates the need for evaluation"
+        },
+        {
+          "id": "d",
+          "text": "Offline evaluation can observe all future traffic"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Offline evaluation tests known cases while monitoring detects real-world behavior and drift.",
+      "learnNote": "Pre-release tests and live traffic provide complementary evidence."
+    },
+    {
+      "id": "ai-engineering-10",
+      "categoryId": "ai-engineering",
+      "prompt": "How should retrieved documents be treated by an AI agent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "As untrusted data, not instructions to execute"
+        },
+        {
+          "id": "b",
+          "text": "As trusted system instructions"
+        },
+        {
+          "id": "c",
+          "text": "As proof that every claim is true"
+        },
+        {
+          "id": "d",
+          "text": "As permission to access any tool"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Retrieved content can contain malicious instructions and should not control agent authority.",
+      "learnNote": "External documents may contain text that attempts to direct the agent."
+    }
+  ]
+}
