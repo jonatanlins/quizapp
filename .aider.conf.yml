@@ -1,0 +1,13 @@
+# Aider Configuration for QuizApp
+# Documentation: https://aider.chat/docs/config/options.html
+
+# Automatically test modifications against TypeScript typechecks and Vitest
+test-cmd: "npm run typecheck && npm test"
+auto-test: true
+
+# Git commit behavior
+auto-commits: true
+
+# Provide project-level agent rules and Next.js guidelines as read-only context
+read:
+  - AGENTS.md

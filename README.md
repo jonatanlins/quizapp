@@ -43,3 +43,33 @@ The question bank, including answer keys, is server-side in `data/questions.json
 - Move sessions, idempotency records, question versions, and leaderboard totals into shared durable storage with transactional constraints; add authentication and authorization for real identities.
 - Review and rewrite answer-revealing Learn Mode notes, expand the question bank, and decide whether repeated daily attempts should count in a competitive leaderboard.
 - Add conflict-safe cross-tab persistence and server-side history, retention policies, rate limits, and monitoring before a public or multi-instance deployment.
+
+## GitHub Actions: Automated PR Solver with Aider
+
+This repository includes an automated GitHub Action workflow ([`.github/workflows/aider-solve-pr.yml`](.github/workflows/aider-solve-pr.yml)) powered by [Aider](https://aider.chat) to automatically solve and iterate on open Pull Requests.
+
+### Capabilities
+- **Auto-solve newly opened PRs**: Reads the PR title and description, checks out the PR branch, implements the requested solution, runs the test suite (`npm run typecheck && npm test`), commits changes, and pushes directly to the PR branch.
+- **Solve existing open PRs**: Add the `aider` label to any open PR, or run the workflow manually via `workflow_dispatch` to process specific or all open PRs.
+- **Interactive PR feedback via comments**: Leave a comment on any open PR starting with `/aider <instructions>` or `@aider <instructions>`. Aider will checkout the PR branch, address your feedback, verify tests pass, and push new commits back to the PR.
+- **Automated test-and-repair loop**: Aider runs `--test-cmd "npm run typecheck && npm test" --auto-test` so all changes are automatically verified and auto-repaired before pushing.
+- **Loop prevention & skip flag**: To exclude a PR from automated processing, include `[skip aider]` in the PR title or description.
+
+### Required Setup
+
+1. **Configure Repository Secret(s)**:
+   In your GitHub repository, navigate to **Settings > Secrets and variables > Actions**, and add at least one LLM API key:
+   - `ANTHROPIC_API_KEY` (default: `claude-3-7-sonnet-20250219`)
+   - `OPENAI_API_KEY` (default: `gpt-4o`)
+   - `GEMINI_API_KEY` (default: `gemini/gemini-2.0-flash`)
+   - `DEEPSEEK_API_KEY` (default: `deepseek/deepseek-chat`)
+   - `OPENROUTER_API_KEY` (default: `openrouter/anthropic/claude-3.5-sonnet`)
+
+2. **Workflow Permissions**:
+   Under **Settings > Actions > General > Workflow permissions**:
+   - Select **Read and write permissions**
+   - Check **Allow GitHub Actions to create and approve pull requests**
+
+3. **Repository Configuration (`.aider.conf.yml`)**:
+   Repository-level defaults for test runner, auto-commits, and agent instruction guidelines (`AGENTS.md`) are configured in [`.aider.conf.yml`](.aider.conf.yml).
+
