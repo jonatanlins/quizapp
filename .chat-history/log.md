@@ -33,3 +33,9 @@
 - user_prompt: "Verify all the edge cases on SPEC.md file and tell me if the code handles the solution for each one.\n\nWrite E2E tests.\n\nCreate a concise README.md explaining the app and how to use it. Also explain the edge cases and trade-offs we accepted and the suggestions for the next steps.\n\nClean up any unused files and verify the test and the build passes with 0 TypeScript errors."
 - assistant_response_summary: "Audited SPEC edge cases and documented partial Learn Mode hint leakage, in-memory storage, anonymous identity and cross-tab limits; added nine Playwright E2E tests, removed unused tsx dependency, and verified 45 tests with 100% coverage, nine E2E tests, build, typecheck and npm audit."
 - files_affected: "README.md, .gitignore, package.json, package-lock.json, next.config.ts, playwright.config.ts, e2e/quiz.spec.ts, tsconfig.json, next-env.d.ts, .chat-history/log.md"
+
+---
+- timestamp: "2026-11-10T15:56:00Z"
+- user_prompt: "add more questions to the quiz data file"
+- assistant_response_summary: "Expanded data/questions.json from 30 to 60 questions (10 additional questions per category across AI Fundamentals, LLM Applications, and AI Engineering); updated category question counts, tests in tests/backend.test.ts, and README.md; verified test suite, 100% coverage, and build."
+- files_affected: "data/questions.json, tests/backend.test.ts, README.md, .chat-history/log.md"

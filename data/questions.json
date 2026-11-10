@@ -4,19 +4,19 @@
       "id": "ai-fundamentals",
       "name": "AI Fundamentals",
       "description": "Core concepts behind modern AI systems.",
-      "questionCount": 10
+      "questionCount": 20
     },
     {
       "id": "llm-applications",
       "name": "LLM Applications",
       "description": "Design and evaluate language-model applications.",
-      "questionCount": 10
+      "questionCount": 20
     },
     {
       "id": "ai-engineering",
       "name": "AI Engineering",
       "description": "Build, secure, and operate AI-powered software.",
-      "questionCount": 10
+      "questionCount": 20
     }
   ],
   "questions": [
@@ -281,6 +281,266 @@
       "learnNote": "Generalization can improve when model complexity is controlled."
     },
     {
+      "id": "ai-fundamentals-11",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is unsupervised learning primarily used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Discovering patterns or groupings in unlabeled data"
+        },
+        {
+          "id": "b",
+          "text": "Training models with explicit ground truth labels"
+        },
+        {
+          "id": "c",
+          "text": "Directly minimizing test set classification loss"
+        },
+        {
+          "id": "d",
+          "text": "Deploying model weights to edge devices"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Unsupervised learning finds underlying structure, patterns, or clusters without target labels.",
+      "learnNote": "Some learning tasks do not require explicit target outputs for training."
+    },
+    {
+      "id": "ai-fundamentals-12",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does underfitting indicate about a machine learning model?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The model is too simple to capture the underlying structure of the data"
+        },
+        {
+          "id": "b",
+          "text": "The model memorized the training set with zero error"
+        },
+        {
+          "id": "c",
+          "text": "The test dataset is larger than the training dataset"
+        },
+        {
+          "id": "d",
+          "text": "The model has too many parameters relative to dataset size"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Underfitting occurs when a model lacks the capacity or complexity to learn patterns from the training data.",
+      "learnNote": "Consider whether a model has sufficient expressive capacity for the problem."
+    },
+    {
+      "id": "ai-fundamentals-13",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is the primary role of a loss function during model training?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Quantifying the difference between predicted outputs and ground truth"
+        },
+        {
+          "id": "b",
+          "text": "Compressing model weights for faster deployment"
+        },
+        {
+          "id": "c",
+          "text": "Formatting user input into model tokens"
+        },
+        {
+          "id": "d",
+          "text": "Measuring the network latency of inference endpoints"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Loss functions measure error between predictions and true targets, guiding optimization.",
+      "learnNote": "Optimization algorithms require a numeric measure of prediction error to guide parameter updates."
+    },
+    {
+      "id": "ai-fundamentals-14",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is the difference between precision and recall?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Precision measures correctness among positive predictions; recall measures coverage of actual positives"
+        },
+        {
+          "id": "b",
+          "text": "Precision measures latency; recall measures throughput"
+        },
+        {
+          "id": "c",
+          "text": "Precision applies only to regression; recall applies only to classification"
+        },
+        {
+          "id": "d",
+          "text": "Precision evaluates training data; recall evaluates test data"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Precision is true positives divided by all predicted positives, while recall is true positives divided by all actual positives.",
+      "learnNote": "Evaluating classifier errors involves balancing false alarms against missed detections."
+    },
+    {
+      "id": "ai-fundamentals-15",
+      "categoryId": "ai-fundamentals",
+      "prompt": "Why is data normalization or feature scaling commonly applied before training?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To bring features onto comparable scales and stabilize optimization"
+        },
+        {
+          "id": "b",
+          "text": "To convert all categorical values into binary labels"
+        },
+        {
+          "id": "c",
+          "text": "To remove the need for a separate validation split"
+        },
+        {
+          "id": "d",
+          "text": "To encrypt features against unauthorized access"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Scaling features to similar ranges prevents features with large numeric values from dominating gradients.",
+      "learnNote": "Optimization algorithms often converge faster when inputs share similar numeric ranges."
+    },
+    {
+      "id": "ai-fundamentals-16",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is the purpose of the validation dataset during model development?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tuning hyperparameters and selecting the best model checkpoint before final testing"
+        },
+        {
+          "id": "b",
+          "text": "Directly updating gradient weights during backpropagation"
+        },
+        {
+          "id": "c",
+          "text": "Encrypting the training pipeline against data tampering"
+        },
+        {
+          "id": "d",
+          "text": "Serving as production traffic for deployed services"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Validation data guides hyperparameter tuning and model selection without contaminating the held-out test set.",
+      "learnNote": "Models need a separate dataset to guide design choices without testing on the final evaluation set."
+    },
+    {
+      "id": "ai-fundamentals-17",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is backpropagation in neural network training?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Computing gradients of the loss function with respect to weights using the chain rule"
+        },
+        {
+          "id": "b",
+          "text": "Reversing the order of training examples in each epoch"
+        },
+        {
+          "id": "c",
+          "text": "Converting continuous predictions into discrete classifications"
+        },
+        {
+          "id": "d",
+          "text": "Deploying model weights backwards through a network cluster"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Backpropagation applies the chain rule of calculus to calculate gradients layer-by-layer backwards from the loss.",
+      "learnNote": "Training neural networks involves determining how each internal weight contributes to the final error."
+    },
+    {
+      "id": "ai-fundamentals-18",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What does the bias-variance tradeoff describe?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The tension between underfitting from oversimplified assumptions and overfitting from excessive sensitivity to training data"
+        },
+        {
+          "id": "b",
+          "text": "The balance between training speed and inference memory consumption"
+        },
+        {
+          "id": "c",
+          "text": "The difference between labeled and unlabeled training examples"
+        },
+        {
+          "id": "d",
+          "text": "The tradeoff between CPU and GPU hardware utilization"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "High bias causes underfitting by missing relevant relations; high variance causes overfitting by modeling random noise.",
+      "learnNote": "Model error can stem from being too rigid or from being overly sensitive to training variations."
+    },
+    {
+      "id": "ai-fundamentals-19",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is transfer learning?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reusing a model pretrained on one task as the starting point for a different but related task"
+        },
+        {
+          "id": "b",
+          "text": "Migrating a database from one cloud provider to another"
+        },
+        {
+          "id": "c",
+          "text": "Converting Python model code into client-side JavaScript"
+        },
+        {
+          "id": "d",
+          "text": "Shuffling training batches between different GPU devices"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Transfer learning leverages knowledge learned from large datasets to achieve strong performance on new tasks with less data.",
+      "learnNote": "Representations learned on broad datasets can be adapted for specialized downstream tasks."
+    },
+    {
+      "id": "ai-fundamentals-20",
+      "categoryId": "ai-fundamentals",
+      "prompt": "What is data augmentation?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Creating synthetic variations of existing training examples to improve generalization"
+        },
+        {
+          "id": "b",
+          "text": "Replacing all original training data with random noise"
+        },
+        {
+          "id": "c",
+          "text": "Encrypting database records to prevent unauthorized access"
+        },
+        {
+          "id": "d",
+          "text": "Compressing model weights to reduce memory usage"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Data augmentation applies transformations to increase dataset diversity and prevent overfitting.",
+      "learnNote": "Generating realistic variations of existing training data can help models generalize better."
+    },
+    {
       "id": "llm-applications-1",
       "categoryId": "llm-applications",
       "prompt": "What is a token in an LLM?",
@@ -541,6 +801,266 @@
       "learnNote": "Applications can supply instructions at different levels of authority."
     },
     {
+      "id": "llm-applications-11",
+      "categoryId": "llm-applications",
+      "prompt": "What is few-shot prompting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Providing example input-output pairs within the prompt to guide model responses"
+        },
+        {
+          "id": "b",
+          "text": "Fine-tuning model weights with a small number of training steps"
+        },
+        {
+          "id": "c",
+          "text": "Prompting a model with fewer than ten tokens"
+        },
+        {
+          "id": "d",
+          "text": "Querying multiple models in parallel and selecting the fastest output"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Few-shot prompting conditions the model on demonstrations in the prompt without modifying weights.",
+      "learnNote": "Demonstrations provided in the prompt context can illustrate the desired formatting and reasoning."
+    },
+    {
+      "id": "llm-applications-12",
+      "categoryId": "llm-applications",
+      "prompt": "What problem does chunking address in a RAG pipeline?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Splitting large documents into semantically coherent segments that fit context limits"
+        },
+        {
+          "id": "b",
+          "text": "Translating human text into programming language syntax"
+        },
+        {
+          "id": "c",
+          "text": "Encrypting stored embeddings in the vector index"
+        },
+        {
+          "id": "d",
+          "text": "Replacing semantic search with keyword indexing"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Chunking divides source documents into manageable passages suitable for retrieval and embedding within context constraints.",
+      "learnNote": "Long source documents often exceed optimal retrieval and context window boundaries."
+    },
+    {
+      "id": "llm-applications-13",
+      "categoryId": "llm-applications",
+      "prompt": "What does fine-tuning an LLM involve compared to prompting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Updating model weights on task-specific training data"
+        },
+        {
+          "id": "b",
+          "text": "Adding retrieval context to the prompt at inference time"
+        },
+        {
+          "id": "c",
+          "text": "Changing only the temperature setting on API calls"
+        },
+        {
+          "id": "d",
+          "text": "Replacing the model tokenizer with a parser"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Fine-tuning modifies the model's learned weights, whereas prompting adapts behavior entirely in-context.",
+      "learnNote": "Adapting an LLM can be done at inference time via context or ahead of time by adjusting parameters."
+    },
+    {
+      "id": "llm-applications-14",
+      "categoryId": "llm-applications",
+      "prompt": "What is semantic caching in an LLM application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reusing stored responses for queries with equivalent meaning based on embedding similarity"
+        },
+        {
+          "id": "b",
+          "text": "Caching static web assets on a content delivery network"
+        },
+        {
+          "id": "c",
+          "text": "Storing prompt templates in local browser storage"
+        },
+        {
+          "id": "d",
+          "text": "Saving database transaction logs to disk"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Semantic caching matches incoming prompts by meaning rather than exact string equality to save cost and latency.",
+      "learnNote": "Users often ask questions with different wording that share the same underlying intent."
+    },
+    {
+      "id": "llm-applications-15",
+      "categoryId": "llm-applications",
+      "prompt": "What is chain-of-thought (CoT) prompting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Encouraging the model to generate intermediate reasoning steps before the final answer"
+        },
+        {
+          "id": "b",
+          "text": "Connecting multiple external databases into a single query pipeline"
+        },
+        {
+          "id": "c",
+          "text": "Chaining together sequential API calls without parsing intermediate results"
+        },
+        {
+          "id": "d",
+          "text": "Executing user code directly in the model environment"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Chain-of-thought prompting prompts the model to break complex reasoning into explicit sequential steps.",
+      "learnNote": "Prompting models to show step-by-step thinking can improve performance on multi-step reasoning tasks."
+    },
+    {
+      "id": "llm-applications-16",
+      "categoryId": "llm-applications",
+      "prompt": "What is the primary role of a re-ranker in a RAG pipeline?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Scoring and reordering retrieved candidate passages to prioritize the most relevant context"
+        },
+        {
+          "id": "b",
+          "text": "Splitting source documents into tokenized sentences"
+        },
+        {
+          "id": "c",
+          "text": "Compressing vector embeddings for storage in memory"
+        },
+        {
+          "id": "d",
+          "text": "Generating final user-facing responses directly"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A re-ranker uses a more accurate cross-encoder model to score the top retrieval candidates before injecting them into the prompt.",
+      "learnNote": "Initial retrieval can retrieve multiple candidates that benefit from finer relevance scoring."
+    },
+    {
+      "id": "llm-applications-17",
+      "categoryId": "llm-applications",
+      "prompt": "What is jailbreaking in the context of LLMs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Crafting prompts specifically designed to bypass model safety filters and guardrails"
+        },
+        {
+          "id": "b",
+          "text": "Rooting the operating system of a GPU server hosting a model"
+        },
+        {
+          "id": "c",
+          "text": "Decoupling token generation from the attention mechanism"
+        },
+        {
+          "id": "d",
+          "text": "Exporting model weights to an unauthorized open-source format"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Jailbreaking uses adversarial phrasing or hypothetical framing to elicit restricted content from aligned models.",
+      "learnNote": "Safety guardrails can be challenged by adversarial prompt formulations."
+    },
+    {
+      "id": "llm-applications-18",
+      "categoryId": "llm-applications",
+      "prompt": "What is the difference between top-p (nucleus) sampling and top-k sampling?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Top-p selects from the smallest set of tokens whose cumulative probability exceeds p; top-k selects from a fixed k highest-probability tokens"
+        },
+        {
+          "id": "b",
+          "text": "Top-p limits the context window size; top-k limits the total generation length"
+        },
+        {
+          "id": "c",
+          "text": "Top-p applies only to embeddings; top-k applies only to chat completions"
+        },
+        {
+          "id": "d",
+          "text": "Top-p is deterministic; top-k is completely random"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Top-p dynamic thresholding adapts the candidate pool based on probability distribution shape, whereas top-k fixes the candidate count.",
+      "learnNote": "Sampling algorithms control the candidate token pool using either cumulative probabilities or fixed counts."
+    },
+    {
+      "id": "llm-applications-19",
+      "categoryId": "llm-applications",
+      "prompt": "What is multi-turn conversation memory in an LLM application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Maintaining relevant dialogue history across consecutive user and assistant messages"
+        },
+        {
+          "id": "b",
+          "text": "Permanently saving every user interaction into a central vector database"
+        },
+        {
+          "id": "c",
+          "text": "Fine-tuning the model weights after each chat interaction"
+        },
+        {
+          "id": "d",
+          "text": "Precomputing embeddings for all future user questions"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Conversation memory manages prior dialogue turns within the context window so the model understands contextual references.",
+      "learnNote": "Conversational applications must supply previous relevant exchanges to maintain context across messages."
+    },
+    {
+      "id": "llm-applications-20",
+      "categoryId": "llm-applications",
+      "prompt": "What is function calling (tool use) in an LLM API?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The model generating structured arguments to call external tools or APIs defined by the application"
+        },
+        {
+          "id": "b",
+          "text": "The model executing arbitrary Python code directly inside the API server"
+        },
+        {
+          "id": "c",
+          "text": "The application rewriting model weights during a live request"
+        },
+        {
+          "id": "d",
+          "text": "A protocol for streaming audio tokens across WebSockets"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Function calling allows models to detect when tools are needed and output structured JSON arguments for the client to execute.",
+      "learnNote": "Applications can declare callable functions that models invoke by producing structured inputs."
+    },
+    {
       "id": "ai-engineering-1",
       "categoryId": "ai-engineering",
       "prompt": "Why set timeouts on model requests?",
@@ -799,6 +1319,266 @@
       "correctOptionId": "a",
       "explanation": "Retrieved content can contain malicious instructions and should not control agent authority.",
       "learnNote": "External documents may contain text that attempts to direct the agent."
+    },
+    {
+      "id": "ai-engineering-11",
+      "categoryId": "ai-engineering",
+      "prompt": "What is the purpose of rate limiting in an AI application?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Protecting upstream model APIs and application infrastructure from overload and abuse"
+        },
+        {
+          "id": "b",
+          "text": "Limiting the number of layers in a neural network model"
+        },
+        {
+          "id": "c",
+          "text": "Compressing prompt tokens to reduce inference latency"
+        },
+        {
+          "id": "d",
+          "text": "Restricting users to answering only one question per session"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Rate limiting throttles traffic volume to prevent denial of service, manage costs, and stay within provider quotas.",
+      "learnNote": "Third-party model providers enforce usage limits and applications must manage traffic flow."
+    },
+    {
+      "id": "ai-engineering-12",
+      "categoryId": "ai-engineering",
+      "prompt": "Why is streaming responses beneficial in interactive LLM applications?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It lowers time-to-first-token (TTFT) and improves perceived latency for users"
+        },
+        {
+          "id": "b",
+          "text": "It eliminates the need for schema validation on model outputs"
+        },
+        {
+          "id": "c",
+          "text": "It reduces the total number of tokens generated by the model"
+        },
+        {
+          "id": "d",
+          "text": "It prevents prompt injection attacks automatically"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Streaming transmits tokens incrementally as they are generated, giving users immediate feedback instead of waiting for the full response.",
+      "learnNote": "Perceived responsiveness often matters more to users than overall generation completion time."
+    },
+    {
+      "id": "ai-engineering-13",
+      "categoryId": "ai-engineering",
+      "prompt": "What does a circuit breaker pattern do when an external AI service becomes unresponsive?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Temporarily halts calls to the failing service to avoid cascading failures and allow recovery"
+        },
+        {
+          "id": "b",
+          "text": "Immediately retries failed requests in a tight loop until success"
+        },
+        {
+          "id": "c",
+          "text": "Permanently revokes the user's authentication credentials"
+        },
+        {
+          "id": "d",
+          "text": "Switches all server traffic from HTTPS to HTTP"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A circuit breaker trips after repeated failures, immediately returning fallback responses and giving the dependency time to recover.",
+      "learnNote": "Resilient architectures avoid overwhelming degraded downstream dependencies."
+    },
+    {
+      "id": "ai-engineering-14",
+      "categoryId": "ai-engineering",
+      "prompt": "What is prompt drift in production AI systems?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Degradation or change in model behavior over time due to upstream updates or shifting input distributions"
+        },
+        {
+          "id": "b",
+          "text": "A network error where tokens arrive out of order"
+        },
+        {
+          "id": "c",
+          "text": "The physical movement of data between cloud regions"
+        },
+        {
+          "id": "d",
+          "text": "Gradual memory leaks in browser JavaScript"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Prompt drift occurs when changes to models, retrieval corpora, or user input distributions alter application behavior.",
+      "learnNote": "A prompt that worked reliably during testing may produce different outcomes over time as underlying systems evolve."
+    },
+    {
+      "id": "ai-engineering-15",
+      "categoryId": "ai-engineering",
+      "prompt": "What is the principle of least privilege when granting tools to an AI agent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Granting the agent only the minimum tool capabilities and permissions necessary for its task"
+        },
+        {
+          "id": "b",
+          "text": "Allowing the agent unrestricted administrative access to simplify code"
+        },
+        {
+          "id": "c",
+          "text": "Preventing the agent from executing any external functions"
+        },
+        {
+          "id": "d",
+          "text": "Giving all agents identical global database credentials"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Least privilege minimizes potential damage if an agent is misled or compromised by untrusted instructions.",
+      "learnNote": "Limiting tool scopes reduces the blast radius of unexpected or hijacked model actions."
+    },
+    {
+      "id": "ai-engineering-16",
+      "categoryId": "ai-engineering",
+      "prompt": "What is semantic versioning of prompt templates?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tracking changes to system and task prompts to manage behavior changes and rollback regressions"
+        },
+        {
+          "id": "b",
+          "text": "Converting prompt strings into semantic vector embeddings"
+        },
+        {
+          "id": "c",
+          "text": "Translating prompt templates into different human languages"
+        },
+        {
+          "id": "d",
+          "text": "Sorting prompt tokens alphabetically before transmission"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Version controlling prompts ensures reproducibility, allows A/B testing, and enables fast rollbacks when prompts degrade performance.",
+      "learnNote": "Prompt modifications can alter system behavior just as significantly as application code changes."
+    },
+    {
+      "id": "ai-engineering-17",
+      "categoryId": "ai-engineering",
+      "prompt": "Why should an AI application implement output guardrails?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To detect and filter policy violations, sensitive data leaks, or malformed responses before reaching users"
+        },
+        {
+          "id": "b",
+          "text": "To accelerate token generation speed from the model provider"
+        },
+        {
+          "id": "c",
+          "text": "To replace backend unit and integration test suites"
+        },
+        {
+          "id": "d",
+          "text": "To compress model responses into binary formats"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Output guardrails provide a defense-in-depth layer checking that generated outputs meet safety, privacy, and quality policies.",
+      "learnNote": "Even well-prompted models can occasionally produce unsafe, biased, or non-compliant responses."
+    },
+    {
+      "id": "ai-engineering-18",
+      "categoryId": "ai-engineering",
+      "prompt": "What is token usage tracking essential for in production AI applications?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Monitoring operational costs, enforcing user quotas, and detecting anomalous consumption"
+        },
+        {
+          "id": "b",
+          "text": "Preventing SQL injection attacks against application databases"
+        },
+        {
+          "id": "c",
+          "text": "Generating cryptographic keys for session authorization"
+        },
+        {
+          "id": "d",
+          "text": "Calculating model accuracy scores automatically"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Tracking input and output tokens provides visibility into per-user and per-feature costs, budget adherence, and anomalous usage patterns.",
+      "learnNote": "LLM provider billing is directly tied to token volumes across requests and responses."
+    },
+    {
+      "id": "ai-engineering-19",
+      "categoryId": "ai-engineering",
+      "prompt": "What is the purpose of canary deployments for AI application updates?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Routing a small fraction of traffic to the new model or prompt to verify quality and safety before full rollout"
+        },
+        {
+          "id": "b",
+          "text": "Deploying model weights to user browser environments"
+        },
+        {
+          "id": "c",
+          "text": "Running automated tests exclusively on synthetic datasets"
+        },
+        {
+          "id": "d",
+          "text": "Encrypting network connections between microservices"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Canary releases expose updates to limited live traffic, reducing the impact of unexpected behavioral shifts or regressions.",
+      "learnNote": "Gradually exposing a new model configuration helps detect unexpected real-world degradation early."
+    },
+    {
+      "id": "ai-engineering-20",
+      "categoryId": "ai-engineering",
+      "prompt": "How should an AI system handle sensitive PII (Personally Identifiable Information) in prompts?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Redact or mask PII before sending text to external model APIs and logs"
+        },
+        {
+          "id": "b",
+          "text": "Include PII in the system instruction to improve contextual personalization"
+        },
+        {
+          "id": "c",
+          "text": "Store PII permanently in public vector database indices"
+        },
+        {
+          "id": "d",
+          "text": "Base64-encode PII and append it to prompt URLs"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Redacting or anonymizing PII before external transmission minimizes privacy compliance risks and prevents accidental exposure.",
+      "learnNote": "Transmitting personal information to external providers requires strict privacy and compliance safeguards."
     }
   ]
 }

@@ -5,11 +5,11 @@ import { categories, questions } from '../lib/server/questions';
 import { advance, answer, ApiError, getSession, leaderboard, start, view } from '../lib/server/store';
 import { GET, POST } from '../app/api/[...path]/route';
 
-test('three categories contain ten complete, distinct questions each', () => {
+test('three categories contain complete, distinct questions matching their count', () => {
   assert.equal(categories.length, 3);
   for (const category of categories) {
     const bank = questions.filter(q => q.categoryId === category.id);
-    assert.equal(bank.length, 10); assert.equal(new Set(bank.map(q => q.id)).size, 10);
+    assert.equal(bank.length, category.questionCount); assert.ok(bank.length >= 10); assert.equal(new Set(bank.map(q => q.id)).size, category.questionCount);
     for (const q of bank) { assert.equal(q.options.length, 4); assert.equal(new Set(q.options.map(o => o.id)).size, 4); assert.ok(q.options.some(o => o.id === q.correctOptionId)); assert.ok(q.explanation && q.learnNote); }
   }
 });
