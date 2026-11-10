@@ -17,6 +17,24 @@
       "name": "AI Engineering",
       "description": "Build, secure, and operate AI-powered software.",
       "questionCount": 20
+    },
+    {
+      "id": "ai-safety-ethics",
+      "name": "AI Safety & Ethics",
+      "description": "Align, evaluate, and secure AI systems against risks and harms.",
+      "questionCount": 10
+    },
+    {
+      "id": "agentic-systems",
+      "name": "Autonomous Agents",
+      "description": "Build multi-step agents, planning loops, and tool-using systems.",
+      "questionCount": 10
+    },
+    {
+      "id": "multimodal-ai",
+      "name": "Multimodal AI",
+      "description": "Work with vision-language models, audio, and cross-modal systems.",
+      "questionCount": 10
     }
   ],
   "questions": [
@@ -1579,6 +1597,786 @@
       "correctOptionId": "a",
       "explanation": "Redacting or anonymizing PII before external transmission minimizes privacy compliance risks and prevents accidental exposure.",
       "learnNote": "Transmitting personal information to external providers requires strict privacy and compliance safeguards."
+    },
+    {
+      "id": "ai-safety-ethics-1",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is the primary objective of RLHF (Reinforcement Learning from Human Feedback)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Aligning model behavior with human intent, preferences, and safety criteria"
+        },
+        {
+          "id": "b",
+          "text": "Increasing the raw token generation speed of the model"
+        },
+        {
+          "id": "c",
+          "text": "Eliminating the need for a pretraining phase"
+        },
+        {
+          "id": "d",
+          "text": "Compressing model parameters to fit on consumer hardware"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "RLHF uses human preference comparisons to fine-tune a model via reward modeling and reinforcement learning toward helpful and safe outputs.",
+      "learnNote": "Pretrained models optimize for next-token prediction, which does not inherently prioritize human values or safety."
+    },
+    {
+      "id": "ai-safety-ethics-2",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is red teaming in the context of AI models?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Adversarial testing designed to discover vulnerabilities, harmful behaviors, and policy violations"
+        },
+        {
+          "id": "b",
+          "text": "Collaborative pair programming between model developers"
+        },
+        {
+          "id": "c",
+          "text": "Benchmarking GPU clock speeds under extreme temperatures"
+        },
+        {
+          "id": "d",
+          "text": "Automating customer support ticket categorization"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Red teaming actively probes models with edge cases and adversarial inputs to uncover failure modes before deployment.",
+      "learnNote": "Security and safety evaluations often use adversarial testing to find vulnerabilities that standard benchmarks miss."
+    },
+    {
+      "id": "ai-safety-ethics-3",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is sycophancy in large language models?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The tendency of a model to agree with a user's stated opinion even when it is factually incorrect"
+        },
+        {
+          "id": "b",
+          "text": "A hardware fault causing repetitive token generation"
+        },
+        {
+          "id": "c",
+          "text": "The ability of a model to translate between ancient languages"
+        },
+        {
+          "id": "d",
+          "text": "A security attack that steals model weights via side channels"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Sycophancy occurs when models tailor responses to validate user biases or beliefs rather than remaining truthful.",
+      "learnNote": "Preference training can inadvertently reward agreeable responses over truthful ones."
+    },
+    {
+      "id": "ai-safety-ethics-4",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is Constitutional AI as pioneered in model alignment?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Using a set of written principles to guide self-critique and revision during training"
+        },
+        {
+          "id": "b",
+          "text": "Requiring government approval before training any frontier model"
+        },
+        {
+          "id": "c",
+          "text": "Hardcoding ethical rules into model GPU firmware"
+        },
+        {
+          "id": "d",
+          "text": "Restricting model training to open-source legal documents"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Constitutional AI specifies high-level principles that the model uses to evaluate and refine its own outputs with minimal human feedback.",
+      "learnNote": "Alignment can leverage AI feedback governed by explicit behavioral principles."
+    },
+    {
+      "id": "ai-safety-ethics-5",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is a model card used for?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Documenting model architecture, intended use cases, limitations, and evaluation performance"
+        },
+        {
+          "id": "b",
+          "text": "Purchasing inference API compute credits from cloud providers"
+        },
+        {
+          "id": "c",
+          "text": "A physical smart card containing encrypted model weights"
+        },
+        {
+          "id": "d",
+          "text": "A software license agreement for open-weights distribution"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Model cards provide standardized documentation on intended tasks, benchmark results, out-of-scope uses, and known ethical considerations.",
+      "learnNote": "Responsible deployment relies on transparent documentation of system boundaries and test results."
+    },
+    {
+      "id": "ai-safety-ethics-6",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What does alignment tax refer to in AI development?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A potential drop in performance or capabilities on certain benchmarks caused by safety interventions"
+        },
+        {
+          "id": "b",
+          "text": "Government tariffs imposed on imported AI compute chips"
+        },
+        {
+          "id": "c",
+          "text": "The financial cost of paying human annotators for dataset labeling"
+        },
+        {
+          "id": "d",
+          "text": "Cloud hosting fees incurred during safety evaluations"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The alignment tax describes any degradation in general capability or fluency that results from imposing safety and behavioral constraints.",
+      "learnNote": "Constraining model outputs to safe distributions can sometimes affect performance on unconstrained tasks."
+    },
+    {
+      "id": "ai-safety-ethics-7",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is watermarking in generative AI outputs?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Embedding subtle, detectable statistical patterns into generated text or media to identify synthetic origin"
+        },
+        {
+          "id": "b",
+          "text": "Printing a visible copyright logo across generated images"
+        },
+        {
+          "id": "c",
+          "text": "Erasing copyrighted material from training datasets"
+        },
+        {
+          "id": "d",
+          "text": "Restricting model API access to verified corporate domains"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Watermarking alters token selection or media features slightly so automated detectors can identify AI-generated content without degrading quality.",
+      "learnNote": "Detecting synthetic media often relies on signals embedded directly into the generation process."
+    },
+    {
+      "id": "ai-safety-ethics-8",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is algorithmic bias in machine learning systems?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Systematic and unfair discrimination in predictions resulting from biased data or flawed assumptions"
+        },
+        {
+          "id": "b",
+          "text": "Random measurement noise that cancels out over time"
+        },
+        {
+          "id": "c",
+          "text": "The deliberate preference for faster algorithms over slower ones"
+        },
+        {
+          "id": "d",
+          "text": "A hardware clock skew between distributed training servers"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Algorithmic bias reflects historical inequities, unrepresentative sampling, or proxy variables in training data that lead to unfair outcomes.",
+      "learnNote": "Models trained on historical data often reproduce or amplify existing disparities."
+    },
+    {
+      "id": "ai-safety-ethics-9",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is the goal of mechanistic interpretability?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Reverse-engineering neural networks to understand the internal circuits and representations driving decisions"
+        },
+        {
+          "id": "b",
+          "text": "Measuring physical energy consumption of server fans during training"
+        },
+        {
+          "id": "c",
+          "text": "Replacing neural networks with handwritten decision trees"
+        },
+        {
+          "id": "d",
+          "text": "Converting Python model scripts into machine assembly code"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Mechanistic interpretability aims to understand how neural network weights and activations form functional circuits that compute specific features.",
+      "learnNote": "Understanding black-box model internals helps verify safety before deployment."
+    },
+    {
+      "id": "ai-safety-ethics-10",
+      "categoryId": "ai-safety-ethics",
+      "prompt": "What is reward hacking in reinforcement learning systems?",
+      "options": [
+        {
+          "id": "a",
+          "text": "When an agent exploits loopholes in a reward specification to achieve a high score without fulfilling the intended goal"
+        },
+        {
+          "id": "b",
+          "text": "An unauthorized cyberattack modifying database reward values"
+        },
+        {
+          "id": "c",
+          "text": "Paying users cryptocurrency to submit feedback on model outputs"
+        },
+        {
+          "id": "d",
+          "text": "Overfitting on the training set due to too many training epochs"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Reward hacking occurs when an optimizer finds degenerate shortcuts that maximize the formal reward metric while violating designers' actual intent.",
+      "learnNote": "Optimizing a proxy metric can produce unexpected behaviors that diverge from the true objective."
+    },
+    {
+      "id": "agentic-systems-1",
+      "categoryId": "agentic-systems",
+      "prompt": "What is the core idea behind the ReAct (Reasoning and Acting) prompting framework?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Interleaving thought generation with action execution and observation retrieval in a loop"
+        },
+        {
+          "id": "b",
+          "text": "Compiling Python model logic into React JavaScript components"
+        },
+        {
+          "id": "c",
+          "text": "Using reactive streams to deliver tokens to web browsers"
+        },
+        {
+          "id": "d",
+          "text": "Executing all available tools simultaneously without reasoning"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "ReAct prompts the model to generate reasoning traces ('Thoughts') followed by tool actions ('Actions') and environment feedback ('Observations').",
+      "learnNote": "Autonomous agents alternate between deliberating on the next step and interacting with external tools."
+    },
+    {
+      "id": "agentic-systems-2",
+      "categoryId": "agentic-systems",
+      "prompt": "Why is a maximum recursion or step limit essential for autonomous agents?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To prevent infinite execution loops and unbounded compute costs when an agent cannot resolve a task"
+        },
+        {
+          "id": "b",
+          "text": "To ensure that agent memory fits inside CPU L1 cache"
+        },
+        {
+          "id": "c",
+          "text": "To comply with international data transfer regulations"
+        },
+        {
+          "id": "d",
+          "text": "To prevent the agent from outputting markdown formatting"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "A step limit guarantees that an agent trapped in a repetitive failure loop will terminate predictably rather than running indefinitely.",
+      "learnNote": "Multi-step agent loops require safeguards against unconstrained execution."
+    },
+    {
+      "id": "agentic-systems-3",
+      "categoryId": "agentic-systems",
+      "prompt": "What is the role of reflection or self-critique in agent architectures?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Evaluating past actions and intermediate outputs to identify errors and adjust subsequent plans"
+        },
+        {
+          "id": "b",
+          "text": "Inverting model tensor dimensions during inference"
+        },
+        {
+          "id": "c",
+          "text": "Mirroring database transactions across backup availability zones"
+        },
+        {
+          "id": "d",
+          "text": "Translating agent logs into human speech"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Self-reflection allows an agent to assess its trajectory, diagnose why an approach failed, and formulate a corrected plan.",
+      "learnNote": "Agents can improve task completion rates by critically evaluating their own intermediate results."
+    },
+    {
+      "id": "agentic-systems-4",
+      "categoryId": "agentic-systems",
+      "prompt": "What is a plan-and-solve agent architecture?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Decomposing a complex task into sequential sub-tasks before executing them individually"
+        },
+        {
+          "id": "b",
+          "text": "Executing actions purely at random until a goal test passes"
+        },
+        {
+          "id": "c",
+          "text": "Generating multiple answers and choosing the shortest string"
+        },
+        {
+          "id": "d",
+          "text": "Replacing external tools with hardcoded database queries"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Plan-and-solve architectures separate high-level strategy (planning) from low-level execution, reducing drift during multi-step tasks.",
+      "learnNote": "Separating roadmap generation from execution helps agents tackle complex multi-stage objectives."
+    },
+    {
+      "id": "agentic-systems-5",
+      "categoryId": "agentic-systems",
+      "prompt": "What distinguishes short-term memory from long-term memory in an AI agent?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Short-term memory lives in the current context window; long-term memory is persisted externally for retrieval"
+        },
+        {
+          "id": "b",
+          "text": "Short-term memory stores numbers; long-term memory stores text"
+        },
+        {
+          "id": "c",
+          "text": "Short-term memory uses GPUs; long-term memory uses TPUs"
+        },
+        {
+          "id": "d",
+          "text": "Short-term memory is permanent; long-term memory expires after each turn"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Short-term memory holds active conversation and scratchpad state, while long-term memory uses vector databases or files across sessions.",
+      "learnNote": "Agents combine working context with external persistence to maintain knowledge across extended tasks."
+    },
+    {
+      "id": "agentic-systems-6",
+      "categoryId": "agentic-systems",
+      "prompt": "What is human-in-the-loop (HITL) authorization in agentic workflows?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Requiring human confirmation before an agent executes high-impact or irreversible actions"
+        },
+        {
+          "id": "b",
+          "text": "Having human annotators write every model prompt by hand"
+        },
+        {
+          "id": "c",
+          "text": "Running all model inference on user client machines"
+        },
+        {
+          "id": "d",
+          "text": "Requiring human approval to load static webpage assets"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "HITL gates critical operations (such as making financial transactions or deleting databases) on explicit user verification.",
+      "learnNote": "High-stakes tool executions often require human oversight before proceeding."
+    },
+    {
+      "id": "agentic-systems-7",
+      "categoryId": "agentic-systems",
+      "prompt": "What is a subagent in hierarchical agent systems?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A specialized agent spawned by a supervisor to complete a delegated subtask and report back"
+        },
+        {
+          "id": "b",
+          "text": "A downgraded model used when network bandwidth is constrained"
+        },
+        {
+          "id": "c",
+          "text": "A client-side JavaScript worker handling DOM rendering"
+        },
+        {
+          "id": "d",
+          "text": "An automated script that restarts crashed server instances"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Hierarchical architectures use a coordinator agent that delegates focused sub-problems to dedicated subagents with specific toolsets.",
+      "learnNote": "Decomposing large problems into specialized workers keeps individual contexts focused and manageable."
+    },
+    {
+      "id": "agentic-systems-8",
+      "categoryId": "agentic-systems",
+      "prompt": "How should an agent handle a tool execution error?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Feed the error message back into the model context so it can adapt its parameters or try an alternative"
+        },
+        {
+          "id": "b",
+          "text": "Immediately crash the entire server application without logging"
+        },
+        {
+          "id": "c",
+          "text": "Fabricate a successful response and continue execution"
+        },
+        {
+          "id": "d",
+          "text": "Disable all tools permanently for the remainder of the session"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Exposing structured error messages in the observation turn enables agents to self-correct typos, invalid parameters, or unexpected states.",
+      "learnNote": "Tool failure details provide essential feedback for an agent to diagnose and recover."
+    },
+    {
+      "id": "agentic-systems-9",
+      "categoryId": "agentic-systems",
+      "prompt": "What is the primary benefit of dynamic few-shot example selection for tool-using agents?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Selecting the most relevant tool usage demonstrations based on the current user query to save context"
+        },
+        {
+          "id": "b",
+          "text": "Hardcoding every possible tool example into the system prompt"
+        },
+        {
+          "id": "c",
+          "text": "Fine-tuning the model tokenizer on tool documentation"
+        },
+        {
+          "id": "d",
+          "text": "Randomly rotating examples to introduce unpredictability"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Dynamic selection retrieves only relevant examples via vector similarity, avoiding context bloat from extensive tool libraries.",
+      "learnNote": "When tool libraries are large, context space can be preserved by injecting only relevant demonstrations."
+    },
+    {
+      "id": "agentic-systems-10",
+      "categoryId": "agentic-systems",
+      "prompt": "What is context stuffing in agent loops and why is it problematic?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Accumulating unfiltered tool outputs in the context until token limits are exhausted or reasoning degrades"
+        },
+        {
+          "id": "b",
+          "text": "Adding too many model parameters to a deep learning network"
+        },
+        {
+          "id": "c",
+          "text": "Packing multiple GPU cards into a single server rack"
+        },
+        {
+          "id": "d",
+          "text": "Submitting multiple form inputs simultaneously in a browser"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Bloating context with noisy tool responses increases cost, raises latency, and causes the model to lose track of the core objective.",
+      "learnNote": "Unbounded accumulation of intermediate tool logs can overwhelm model attention."
+    },
+    {
+      "id": "multimodal-ai-1",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is a Vision-Language Model (VLM)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A model capable of processing and reasoning over both text and image inputs simultaneously"
+        },
+        {
+          "id": "b",
+          "text": "A model that only generates computer code for graphic shaders"
+        },
+        {
+          "id": "c",
+          "text": "A traditional optical character recognition (OCR) engine without a language model"
+        },
+        {
+          "id": "d",
+          "text": "A hardware display driver optimized for machine learning"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "VLMs integrate visual encoders with language models to understand, analyze, and answer questions about images and text jointly.",
+      "learnNote": "Multimodal systems combine representations from different sensory modalities into a shared reasoning space."
+    },
+    {
+      "id": "multimodal-ai-2",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is CLIP (Contrastive Language-Image Pretraining) primarily trained to do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Learn a shared embedding space where matching text and image pairs have high cosine similarity"
+        },
+        {
+          "id": "b",
+          "text": "Directly generate photorealistic 3D animations from audio"
+        },
+        {
+          "id": "c",
+          "text": "Compress video files into MP4 format using neural codecs"
+        },
+        {
+          "id": "d",
+          "text": "Translate spoken audio directly into foreign subtitles"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "CLIP uses contrastive learning across massive image-text pairs so visual concepts and natural language descriptions map to nearby vectors.",
+      "learnNote": "Cross-modal retrieval relies on embedding visual and textual concepts into a common coordinate system."
+    },
+    {
+      "id": "multimodal-ai-3",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is visual prompting in modern vision models?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Guiding the model's visual attention by drawing bounding boxes, arrows, or circles directly on the input image"
+        },
+        {
+          "id": "b",
+          "text": "Generating video clips from command-line terminal commands"
+        },
+        {
+          "id": "c",
+          "text": "Displaying a popup window asking users to upload images"
+        },
+        {
+          "id": "d",
+          "text": "Formatting image metadata into XML tags"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Visual prompting overlays visual markers (like colored circles or boxes) on images to direct model focus toward specific regions.",
+      "learnNote": "Directing model attention can be achieved through visual cues applied directly to input media."
+    },
+    {
+      "id": "multimodal-ai-4",
+      "categoryId": "multimodal-ai",
+      "prompt": "How do Vision Transformers (ViT) process images?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By splitting an image into fixed-size patches, flattening them, and treating them as a sequence of tokens"
+        },
+        {
+          "id": "b",
+          "text": "By converting images into ASCII text characters before convolution"
+        },
+        {
+          "id": "c",
+          "text": "By scanning pixels one at a time from top to bottom"
+        },
+        {
+          "id": "d",
+          "text": "By training a separate convolutional network for every color channel"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "ViT breaks images into a grid of patches (e.g., 16x16 pixels) and applies standard self-attention mechanisms identical to text transformers.",
+      "learnNote": "Transformer attention mechanisms can process visual patches analogously to text tokens."
+    },
+    {
+      "id": "multimodal-ai-5",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is automatic speech recognition (ASR)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Converting spoken acoustic audio signals into readable text transcripts"
+        },
+        {
+          "id": "b",
+          "text": "Synthesizing artificial human speech from written paragraphs"
+        },
+        {
+          "id": "c",
+          "text": "Compressing MP3 audio files to reduce disk footprint"
+        },
+        {
+          "id": "d",
+          "text": "Filtering background hiss from audio recordings"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "ASR systems (such as Whisper) transcribe spoken language audio into written text.",
+      "learnNote": "Speech-to-text systems map audio waveforms into sequences of linguistic tokens."
+    },
+    {
+      "id": "multimodal-ai-6",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is text-to-speech (TTS) synthesis?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Generating spoken natural audio waveforms from input text"
+        },
+        {
+          "id": "b",
+          "text": "Translating foreign subtitles into English text"
+        },
+        {
+          "id": "c",
+          "text": "Detecting speaker gender and sentiment from audio files"
+        },
+        {
+          "id": "d",
+          "text": "Transcribing microphone recordings into markdown files"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "TTS models convert written sentences into natural, expressive human-like spoken audio.",
+      "learnNote": "Generating audible voice output from written language is a core multimodal capability."
+    },
+    {
+      "id": "multimodal-ai-7",
+      "categoryId": "multimodal-ai",
+      "prompt": "How do latent diffusion models generate images from text descriptions?",
+      "options": [
+        {
+          "id": "a",
+          "text": "By iteratively removing noise from a latent representation guided by text embeddings"
+        },
+        {
+          "id": "b",
+          "text": "By stitching together pre-existing stock photographs from a database"
+        },
+        {
+          "id": "c",
+          "text": "By rendering vector graphics using mathematical bezier curves"
+        },
+        {
+          "id": "d",
+          "text": "By executing Python turtle graphics commands"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Diffusion models start from random Gaussian noise in a compressed latent space and iteratively denoise it conditioned on prompt embeddings.",
+      "learnNote": "Generative image models often work by gradually reversing a noise-adding process conditioned on text."
+    },
+    {
+      "id": "multimodal-ai-8",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is spatial reasoning in vision-language models?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The ability to understand relative physical positions, orientations, and distances between objects in an image"
+        },
+        {
+          "id": "b",
+          "text": "The amount of hard drive storage required to store image files"
+        },
+        {
+          "id": "c",
+          "text": "The rate at which satellite imagery is downloaded from orbit"
+        },
+        {
+          "id": "d",
+          "text": "The process of calculating server rack space in a datacenter"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Spatial reasoning enables models to answer queries about which objects are above, behind, closer, or larger than others.",
+      "learnNote": "Multimodal models must learn physical geometric relationships depicted within 2D image projections."
+    },
+    {
+      "id": "multimodal-ai-9",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is image tokenization in multimodal architectures?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Converting visual regions or patches into discrete or continuous vector representations compatible with transformer layers"
+        },
+        {
+          "id": "b",
+          "text": "Watermarking images with a cryptographic token to prevent forgery"
+        },
+        {
+          "id": "c",
+          "text": "Minting non-fungible digital tokens (NFTs) from user graphics"
+        },
+        {
+          "id": "d",
+          "text": "Compressing JPEG images into smaller byte arrays"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Image tokenization transforms visual data into representations that can be concatenated with text tokens in a unified model.",
+      "learnNote": "Integrating vision and language requires converting continuous visual information into tokens the model can attend to."
+    },
+    {
+      "id": "multimodal-ai-10",
+      "categoryId": "multimodal-ai",
+      "prompt": "What is document visual question answering (DocVQA)?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Extracting and reasoning over information from complex documents featuring tables, forms, and layout formatting"
+        },
+        {
+          "id": "b",
+          "text": "Automatically converting PDF documents into plain text files"
+        },
+        {
+          "id": "c",
+          "text": "Checking spelling errors in word processing applications"
+        },
+        {
+          "id": "d",
+          "text": "Validating digital cryptographic signatures on legal agreements"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "DocVQA models understand both typographic content and visual spatial layout (tables, headers, forms, diagrams) to answer queries.",
+      "learnNote": "Document understanding requires interpreting visual layout cues alongside textual content."
     }
   ]
 }

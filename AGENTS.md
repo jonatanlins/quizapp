@@ -4,23 +4,6 @@
 Postman CLI is installed on this device, and can be used for API Engineering work.
 <!-- postman-cli:installation:end -->
 
-## Conversation history
-
-- At the start of each session, read `.chat-history/log.md` for previous context. Create the directory and file if missing.
-- Before completing every response, append an entry to `.chat-history/log.md` for the current user prompt and response. Never delete or overwrite previous entries.
-- Use this exact entry format, with double-quoted values and proper escaping of quotes, backslashes, and newlines:
-
-  ```yaml
-  ---
-  - timestamp: "<ISO 8601 timestamp if available, otherwise estimate based on conversation order>"
-  - user_prompt: "<the user's original prompt>"
-  - assistant_response_summary: "<concise, specific summary, including function names, endpoints, or key decisions when relevant>"
-  - files_affected: "<comma-separated list of files created or modified during this response, or none>"
-  ```
-
-- Include only files actually created or modified during the current response in `files_affected`, including the history file itself when it is updated.
-- Perform history maintenance silently, without asking for confirmation. Follow higher-priority instructions and applicable tool limitations.
-
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

@@ -5,8 +5,8 @@ import { categories, questions } from '../lib/server/questions';
 import { advance, answer, ApiError, getSession, leaderboard, start, view } from '../lib/server/store';
 import { GET, POST } from '../app/api/[...path]/route';
 
-test('three categories contain complete, distinct questions matching their count', () => {
-  assert.equal(categories.length, 3);
+test('all categories contain complete, distinct questions matching their count', () => {
+  assert.equal(categories.length, 6);
   for (const category of categories) {
     const bank = questions.filter(q => q.categoryId === category.id);
     assert.equal(bank.length, category.questionCount); assert.ok(bank.length >= 10); assert.equal(new Set(bank.map(q => q.id)).size, category.questionCount);

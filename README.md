@@ -1,6 +1,6 @@
 # QuizApp
 
-QuizApp is a learning quiz for AI builders. Pick one of three topics, enter a username, and answer five multiple-choice questions. Learn Mode adds context before each answer. Results include explanations, missed questions, attempt history, and progress. The leaderboard sums correct answers across completed quizzes; Quiz and Learn modes are ranked separately. The daily challenge uses the UTC date to select the same five questions for everyone.
+QuizApp is a learning quiz for AI builders. Pick one of six topics, enter a username, and answer five multiple-choice questions. Learn Mode adds context before each answer. Results include explanations, missed questions, attempt history, and progress. The leaderboard sums correct answers across completed quizzes; Quiz and Learn modes are ranked separately. The daily challenge uses the UTC date to select the same five questions for everyone.
 
 ## Run locally
 
@@ -33,7 +33,7 @@ The question bank, including answer keys, is server-side in `data/questions.json
 | Repeated completion | **Handled in one server process:** completion is a state transition; the leaderboard is derived from completed sessions and counts each session once. There is no durable database transaction. |
 | Identity and tampering | **Demo only:** random session credentials are sent in authorization headers, and anonymous IDs are separate from display names. LocalStorage and client-generated IDs are untrusted; users can impersonate IDs, edit local history, or share names. |
 | Cumulative leaderboard | **Handled as specified:** every completed retake contributes; attempts and accuracy are displayed, with separate Learn and Quiz rankings. More attempts can outrank higher accuracy. |
-| Learn Mode and memorization | **Partial:** hints are separate from answer keys and options are shuffled, but some hints paraphrase the right answer. The 60-question bank and post-answer explanations make memorization easy. |
+| Learn Mode and memorization | **Partial:** hints are separate from answer keys and options are shuffled, but some hints paraphrase the right answer. The 90-question bank and post-answer explanations make memorization easy. |
 | Changed questions and browser storage | **Handled with limits:** sessions snapshot question content, and completed local reviews preserve missed questions. Storage failures or corrupt data are reported and can be reset; blocked storage prevents unsafe submissions. Clearing storage loses local history. |
 | Chaos and uncertain outcomes | **Handled:** development-only chaos can fail before processing or simulate a lost response after processing. A pending answer stays locked until retried or reconciled; production disables chaos. |
 | Daily challenge | **Handled with limits:** server-selected UTC date and question order are pinned to the session. Changing the question bank can change that day's selection for newly started sessions. Retakes count again on the leaderboard. |
