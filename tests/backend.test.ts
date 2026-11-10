@@ -126,6 +126,9 @@ test('server rejects unknown categories, questions, and options, and reports int
   assert.throws(() => advance(s, 'missing'), ApiError); assert.throws(() => answer(s, { questionId: s.questions[0].id, optionId: randomUUID() }, randomUUID()), ApiError);
   for (let i = 0; i < 5; i++) { const q = s.questions[i]; const chosen = i < 3 ? q.correctOptionId : q.options.find(o => o.id !== q.correctOptionId)!.id; answer(s, { questionId: q.id, optionId: chosen }, randomUUID()); advance(s, q.id); }
   const finished = view(s); assert.ok('results' in finished); assert.equal(finished.results.message, 'Good work — keep learning!');
+  const low = start({ categoryId: 'daily', userId: randomUUID(), username: 'Low', learnMode: false }, randomUUID()); const sLow = getSession(low.session.id, low.token);
+  for (let i = 0; i < 5; i++) { const q = sLow.questions[i]; answer(sLow, { questionId: q.id, optionId: q.options.find(o => o.id !== q.correctOptionId)!.id }, randomUUID()); advance(sLow, q.id); }
+  const lowFinished = view(sLow); assert.ok('results' in lowFinished); assert.equal(lowFinished.results.message, 'Keep practicing — every attempt helps!');
 });
 test('leaderboard breaks ties for users with the same name', () => {
   for (let i = 0; i < 2; i++) { const created = start({ categoryId: 'daily', userId: randomUUID(), username: 'Tied', learnMode: true }, randomUUID()); const s = getSession(created.session.id, created.token); for (let j = 0; j < 5; j++) { const q = s.questions[j]; answer(s, { questionId: q.id, optionId: q.correctOptionId }, randomUUID()); advance(s, q.id); } }

@@ -2,6 +2,12 @@
 
 QuizApp is a learning quiz for AI builders. Pick one of six topics, enter a username, and answer five multiple-choice questions. Learn Mode adds context before each answer. Results include explanations, missed questions, attempt history, and progress. The leaderboard sums correct answers across completed quizzes; Quiz and Learn modes are ranked separately. The daily challenge uses the UTC date to select the same five questions for everyone.
 
+<p align="center">
+  <img src="public/demo.gif" alt="QuizApp Demo Walkthrough" width="100%" />
+  <br />
+  <em>Interactive walkthrough created programmatically with <a href="https://www.remotion.dev">Remotion</a> · <a href="public/demo.mp4">View HD video (MP4)</a></em>
+</p>
+
 ## Run locally
 
 Use Node.js 24 (recommended) and npm:
@@ -20,6 +26,8 @@ npx playwright install chromium  # first time only
 npm run test:e2e         # isolated local browser-test server on port 3233
 npm run typecheck
 npm run build
+npm run video:render     # render Remotion demo video to public/demo.mp4
+npm run video:preview    # open interactive Remotion Studio preview
 ```
 
 The question bank, including answer keys, is server-side in `data/questions.json`; do not put it in `public/` or import it into client components. The API is documented by the route implementation in `app/api/[...path]/route.ts`.
