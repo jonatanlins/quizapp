@@ -20,6 +20,9 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000). The top chaos bar can simulate failures before processing or a lost response in development. API responses intentionally take at least 500 ms. Daily challenges reset at 00:00 UTC; a session started earlier retains its original questions and date.
 
 ```sh
+npm run check            # Biome lint and formatting check
+npm run check:fix        # auto-format, organize imports and apply Biome safe fixes
+npm run format           # auto-format all codebase files with Biome
 npm test                 # unit and component tests
 npm run test:coverage    # enforce 100% coverage for app, API and components
 npx playwright install chromium  # first time only
@@ -80,4 +83,22 @@ This repository includes an automated GitHub Action workflow ([`.github/workflow
 
 3. **Repository Configuration (`.aider.conf.yml`)**:
    Repository-level defaults for test runner, auto-commits, and agent instruction guidelines (`AGENTS.md`) are configured in [`.aider.conf.yml`](.aider.conf.yml).
+
+## CI/CD & Automated Quality Gates
+
+This repository features automated CI/CD pipelines in `.github/workflows/`:
+
+### 1. Core CI & Playwright E2E ([`.github/workflows/ci.yml`](.github/workflows/ci.yml))
+Triggered on every `push` to `main` and on pull requests:
+- **Biome Check**: Fast linting, formatting, and import sorting validation (`biome ci .`).
+- **Typecheck**: Strict TypeScript compiler checks (`tsc --noEmit`).
+- **Unit & Integration Tests**: 100% statement, branch, function, and line coverage validation via Vitest (`npm run test:coverage`).
+- **Next.js Production Build**: Verifies that `next build` bundles without SSR/SSG errors.
+- **Playwright E2E Suite**: Automatically provisions Chromium and executes browser test flows in [`e2e/quiz.spec.ts`](e2e/quiz.spec.ts), uploading trace and video artifacts on failure.
+- **PR Test Coverage Summary**: Automatically parses `coverage/coverage-summary.json` and posts/updates a sticky markdown coverage table on PRs.
+
+### 2. Biome Auto-Formatting & Git Hooks
+- **Git Pre-commit Hook**: Managed with [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged). Staged files are automatically formatted and verified in milliseconds on `git commit`.
+- **Configuration**: Settings for code style, quotes, indentation, and rules are located in [`biome.json`](biome.json).
+
 

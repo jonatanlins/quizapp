@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ArrowRight, BookOpen, Bot, Check, Sparkles } from 'lucide-react';
+import type React from 'react';
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { HeaderBar } from '../components/HeaderBar';
 
 interface HeroSceneProps {
@@ -116,8 +116,8 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 margin: 0,
               }}
             >
-              Big ideas are easier to understand one question at a time. Pick a topic, test what
-              you know, and learn something along the way.
+              Big ideas are easier to understand one question at a time. Pick a topic, test what you
+              know, and learn something along the way.
             </p>
 
             <div
@@ -494,7 +494,9 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 minHeight: 200,
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
                 <div
                   style={{
                     width: 38,
@@ -510,7 +512,14 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>01 / 06</span>
               </div>
               <div style={{ marginTop: 20 }}>
-                <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.11em', color: '#716a76' }}>
+                <span
+                  style={{
+                    fontSize: 9,
+                    fontWeight: 800,
+                    letterSpacing: '0.11em',
+                    color: '#716a76',
+                  }}
+                >
                   THE FOUNDATION
                 </span>
                 <h3
@@ -541,7 +550,9 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 minHeight: 200,
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
                 <div
                   style={{
                     width: 38,
@@ -557,7 +568,14 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>02 / 06</span>
               </div>
               <div style={{ marginTop: 20 }}>
-                <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.11em', color: '#716a76' }}>
+                <span
+                  style={{
+                    fontSize: 9,
+                    fontWeight: 800,
+                    letterSpacing: '0.11em',
+                    color: '#716a76',
+                  }}
+                >
                   THE BUILDING BLOCKS
                 </span>
                 <h3
@@ -588,14 +606,13 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 minHeight: 200,
                 border: hoveredCard === 'agents' ? '2px solid #5a8d62' : '2px solid transparent',
                 transform: hoveredCard === 'agents' ? 'translateY(-3px)' : 'none',
-                boxShadow:
-                  hoveredCard === 'agents'
-                    ? '0 12px 24px rgba(45,85,52,0.15)'
-                    : 'none',
+                boxShadow: hoveredCard === 'agents' ? '0 12px 24px rgba(45,85,52,0.15)' : 'none',
                 transition: 'all 0.15s ease',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
                 <div
                   style={{
                     width: 38,
@@ -612,7 +629,14 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>05 / 06</span>
               </div>
               <div style={{ marginTop: 20 }}>
-                <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.11em', color: '#557257' }}>
+                <span
+                  style={{
+                    fontSize: 9,
+                    fontWeight: 800,
+                    letterSpacing: '0.11em',
+                    color: '#557257',
+                  }}
+                >
                   THE AUTONOMY
                 </span>
                 <h3

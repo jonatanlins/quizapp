@@ -1,8 +1,8 @@
 # Aider Configuration for QuizApp
 # Documentation: https://aider.chat/docs/config/options.html
 
-# Automatically test modifications against TypeScript typechecks and Vitest
-test-cmd: "npm run typecheck && npm test"
+# Automatically format, lint, and test modifications against TypeScript typechecks and Vitest
+test-cmd: "npm run check:fix && npm run typecheck && npm test"
 auto-test: true
 
 # Git commit behavior

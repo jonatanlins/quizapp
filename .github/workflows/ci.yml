@@ -1,0 +1,108 @@
+name: CI & E2E Quality Gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  quality-and-tests:
+    name: Lint, Typecheck, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set up Biome
+        uses: biomejs/setup-biome@v2
+
+      - name: Run Biome Code Quality Check
+        run: biome ci .
+
+      - name: Run TypeScript Typecheck
+        run: npm run typecheck
+
+      - name: Run Vitest with Coverage
+        run: npm run test:coverage
+
+      - name: Run Next.js Production Build
+        run: npm run build
+
+      - name: Post or Update PR Coverage Comment
+        if: github.event_name == 'pull_request' && (success() || failure())
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if [ -f "coverage/coverage-summary.json" ]; then
+            python3 .github/scripts/generate_coverage_comment.py coverage/coverage-summary.json /tmp/coverage_comment.md
+
+            # Check if a coverage comment already exists
+            EXISTING_COMMENT_ID=$(gh api repos/${{ github.repository }}/issues/${PR_NUMBER}/comments \
+              --jq '.[] | select(.body | contains("<!-- vitest-coverage-report -->")) | .id' | head -n 1)
+
+            if [ -n "$EXISTING_COMMENT_ID" ]; then
+              echo "Updating existing coverage comment #$EXISTING_COMMENT_ID on PR #${PR_NUMBER}..."
+              gh api repos/${{ github.repository }}/issues/comments/${EXISTING_COMMENT_ID} \
+                -X PATCH -F body=@/tmp/coverage_comment.md
+            else
+              echo "Posting new coverage comment on PR #${PR_NUMBER}..."
+              gh pr comment "${PR_NUMBER}" --body-file /tmp/coverage_comment.md
+            fi
+          else
+            echo "No coverage summary file found; skipping coverage comment."
+          fi
+
+  e2e-playwright:
+    name: Playwright E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium with system dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright E2E Tests
+        run: npm run test:e2e
+        env:
+          QUIZAPP_E2E: '1'
+
+      - name: Upload Playwright Test Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

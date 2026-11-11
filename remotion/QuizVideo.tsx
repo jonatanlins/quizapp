@@ -1,10 +1,10 @@
-import React from 'react';
+import type React from 'react';
 import { interpolate, Sequence, useCurrentFrame } from 'remotion';
 import { Cursor } from './components/Cursor';
 import { HeroScene } from './scenes/HeroScene';
+import { OutroScene } from './scenes/OutroScene';
 import { QuizScene } from './scenes/QuizScene';
 import { ResultsScene } from './scenes/ResultsScene';
-import { OutroScene } from './scenes/OutroScene';
 
 export const QuizVideo: React.FC = () => {
   const frame = useCurrentFrame();

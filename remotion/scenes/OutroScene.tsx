@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 
 export const OutroScene: React.FC = () => {

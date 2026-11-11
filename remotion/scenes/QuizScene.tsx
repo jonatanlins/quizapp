@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ArrowRight, CheckCircle2, Sparkles, X } from 'lucide-react';
+import type React from 'react';
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { HeaderBar } from '../components/HeaderBar';
 
 interface QuizSceneProps {
@@ -209,7 +209,8 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                 A little context
               </strong>
               <p style={{ margin: '3px 0 0', lineHeight: 1.4, color: '#54466d' }}>
-                Autonomous agents alternate between deliberating on the next step and interacting with external tools.
+                Autonomous agents alternate between deliberating on the next step and interacting
+                with external tools.
               </p>
             </div>
           </div>
@@ -225,10 +226,14 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                 border: isAnswered
                   ? '1.5px solid #7ba986'
                   : selectedOption === 'a'
-                  ? '1.5px solid #8a72bc'
-                  : '1px solid #dfddd6',
+                    ? '1.5px solid #8a72bc'
+                    : '1px solid #dfddd6',
                 borderRadius: 6,
-                backgroundColor: isAnswered ? '#eef7ef' : selectedOption === 'a' ? '#fbf9fe' : '#fffefa',
+                backgroundColor: isAnswered
+                  ? '#eef7ef'
+                  : selectedOption === 'a'
+                    ? '#fbf9fe'
+                    : '#fffefa',
                 padding: '10px 14px',
                 fontSize: 12,
                 color: isAnswered ? '#325e3a' : '#24221f',
@@ -253,7 +258,8 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                 A
               </span>
               <span style={{ flex: 1 }}>
-                Interleaving thought generation with action execution and observation retrieval in a loop
+                Interleaving thought generation with action execution and observation retrieval in a
+                loop
               </span>
               {isAnswered && <CheckCircle2 size={18} color="#3b744a" />}
             </div>
@@ -288,7 +294,9 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
               >
                 B
               </span>
-              <span style={{ flex: 1 }}>Generating all thoughts upfront before executing any actions</span>
+              <span style={{ flex: 1 }}>
+                Generating all thoughts upfront before executing any actions
+              </span>
             </div>
 
             {/* Option C */}
@@ -321,7 +329,9 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
               >
                 C
               </span>
-              <span style={{ flex: 1 }}>Replacing neural networks with hardcoded symbolic rule engines</span>
+              <span style={{ flex: 1 }}>
+                Replacing neural networks with hardcoded symbolic rule engines
+              </span>
             </div>
           </div>
 
@@ -340,13 +350,22 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                 transform: `translateY(${interpolate(feedbackEntrance, [0, 1], [10, 0])}px)`,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, fontWeight: 700 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: 13,
+                  fontWeight: 700,
+                }}
+              >
                 <CheckCircle2 size={18} color="#315a39" />
                 <span>That’s right!</span>
               </div>
               <p style={{ margin: '6px 0 12px', lineHeight: 1.5, fontSize: 11.5 }}>
-                ReAct prompts the model to generate reasoning traces (&apos;Thoughts&apos;) followed by tool
-                actions (&apos;Actions&apos;) and environment feedback (&apos;Observations&apos;).
+                ReAct prompts the model to generate reasoning traces (&apos;Thoughts&apos;) followed
+                by tool actions (&apos;Actions&apos;) and environment feedback
+                (&apos;Observations&apos;).
               </p>
               <div
                 style={{
@@ -359,7 +378,11 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                   padding: '9px 15px',
                   fontSize: 11,
                   fontWeight: 700,
-                  transform: nextButtonClicked ? 'scale(0.95)' : nextButtonHovered ? 'translateY(-1px)' : 'none',
+                  transform: nextButtonClicked
+                    ? 'scale(0.95)'
+                    : nextButtonHovered
+                      ? 'translateY(-1px)'
+                      : 'none',
                   boxShadow: nextButtonHovered ? '0 4px 12px rgba(0,0,0,0.15)' : 'none',
                   cursor: 'pointer',
                 }}

@@ -1,5 +1,5 @@
-import { Config } from '@remotion/cli/config';
 import fs from 'node:fs';
+import { Config } from '@remotion/cli/config';
 
 const chromeCandidates = [
   process.env.REMOTION_CHROME,

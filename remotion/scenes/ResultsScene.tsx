@@ -1,6 +1,6 @@
-import React from 'react';
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ArrowRight, RotateCcw, Trophy } from 'lucide-react';
+import type React from 'react';
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { HeaderBar } from '../components/HeaderBar';
 
 export const ResultsScene: React.FC = () => {
@@ -84,7 +84,9 @@ export const ResultsScene: React.FC = () => {
             >
               Look at you go<span style={{ color: '#a38bd3' }}>.</span>
             </h1>
-            <p style={{ color: '#777269', fontSize: 13, lineHeight: 1.5, margin: 0, maxWidth: 380 }}>
+            <p
+              style={{ color: '#777269', fontSize: 13, lineHeight: 1.5, margin: 0, maxWidth: 380 }}
+            >
               Flawless run! You mastered agent loops, tool use, and reasoning patterns.
             </p>
 

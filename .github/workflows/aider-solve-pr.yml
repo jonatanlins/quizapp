@@ -225,77 +225,23 @@ jobs:
               continue
             fi
 
-            # Build prompt file safely using Python
+            # Build prompt file safely using Python script
             export PR_NUM PR_TITLE PR_BODY
-            python3 - << 'PYEOF'
-import os
-
-pr_num = os.environ.get("PR_NUM", "")
-pr_title = os.environ.get("PR_TITLE", "")
-pr_body = os.environ.get("PR_BODY", "")
-comment_body = os.environ.get("COMMENT_BODY", "")
-input_instructions = os.environ.get("INPUT_INSTRUCTIONS", "")
-event_name = os.environ.get("EVENT_NAME", "")
-
-if input_instructions.strip():
-    prompt = f"""Task instructions:
-{input_instructions}
-
-Reference Pull Request #{pr_num}: {pr_title}
-Description:
-{pr_body}
-
-Please inspect the codebase, implement the requested features or fixes, verify that tests and typechecks pass, and write clean, maintainable code."""
-
-elif (event_name in ("issue_comment", "pull_request_review_comment")) and comment_body.strip():
-    prompt = f"""A reviewer left the following feedback on PR #{pr_num}:
-{comment_body}
-
-Pull Request #{pr_num} Title: {pr_title}
-Description:
-{pr_body}
-
-Please address the reviewer feedback, modify the codebase accordingly, and ensure that all tests pass."""
-
-else:
-    prompt = f"""Solve and implement Pull Request #{pr_num}:
-Title: {pr_title}
-
-Description:
-{pr_body}
-
-Please inspect the repository, implement all requested changes and requirements, ensure that 'npm run typecheck && npm test' passes, and produce clean, well-tested code."""
-
-with open("/tmp/aider_prompt.txt", "w", encoding="utf-8") as f:
-    f.write(prompt)
-PYEOF
+            python3 .github/scripts/prepare_aider_prompt.py
 
             echo "Invoking Aider with model: $SELECTED_MODEL..."
 
             # Run Aider with automated tests & non-interactive execution
             if ! aider \
               --model "$SELECTED_MODEL" \
-              --test-cmd "npm run typecheck && npm test" \
+              --test-cmd "npx @biomejs/biome check --write && npm run typecheck && npm test" \
               --auto-test \
               --yes-always \
               --no-check-update \
               --message-file /tmp/aider_prompt.txt; then
 
               echo "Aider encountered an error while processing PR #${PR_NUM}."
-              python3 - << 'PYEOF'
-import os
-pr_num = os.environ.get("PR_NUM", "")
-selected_model = os.environ.get("SELECTED_MODEL", "")
-
-comment_content = f"""### ⚠️ Aider Execution Notice for PR #{pr_num}
-
-Aider attempted to solve this PR using `{selected_model}`, but encountered an issue or tests could not be resolved automatically.
-
-Please check the GitHub Actions workflow run logs for full details and test failure outputs."""
-
-with open(f"/tmp/pr_comment_{pr_num}.md", "w", encoding="utf-8") as f:
-    f.write(comment_content)
-PYEOF
+              python3 .github/scripts/format_aider_comment.py error
               gh pr comment "$PR_NUM" --body-file "/tmp/pr_comment_${PR_NUM}.md" || true
               continue
             fi
@@ -317,34 +263,7 @@ PYEOF
               COMMITS_LIST=$(git log --oneline "${INITIAL_REV}..${FINAL_REV}")
               export COMMITS_LIST
 
-              python3 - << 'PYEOF'
-import os
-
-pr_num = os.environ.get("PR_NUM", "")
-selected_model = os.environ.get("SELECTED_MODEL", "")
-commits_list = os.environ.get("COMMITS_LIST", "")
-
-comment_content = f"""### 🤖 Aider Solved PR #{pr_num}
-
-Aider has implemented the requested changes for this PR.
-
-**Model:** `{selected_model}`
-**Verification:** `npm run typecheck && npm test` passed ✅
-
-<details>
-<summary><b>Commits applied:</b></summary>
-
-```text
-{commits_list}
-```
-
-</details>
-
-Please review the updated code!"""
-
-with open(f"/tmp/pr_comment_{pr_num}.md", "w", encoding="utf-8") as f:
-    f.write(comment_content)
-PYEOF
+              python3 .github/scripts/format_aider_comment.py success
 
               gh pr comment "$PR_NUM" --body-file "/tmp/pr_comment_${PR_NUM}.md"
               gh pr edit "$PR_NUM" --add-label "aider-solved" || true
@@ -355,19 +274,7 @@ PYEOF
               fi
             else
               echo "No changes made by Aider on PR #${PR_NUM}."
-              python3 - << 'PYEOF'
-import os
-
-pr_num = os.environ.get("PR_NUM", "")
-selected_model = os.environ.get("SELECTED_MODEL", "")
-
-comment_content = f"""### 🤖 Aider Notice for PR #{pr_num}
-
-Aider evaluated this PR using `{selected_model}`, but no file changes were needed (type checks and test suites are already passing and requirements are satisfied)."""
-
-with open(f"/tmp/pr_comment_{pr_num}.md", "w", encoding="utf-8") as f:
-    f.write(comment_content)
-PYEOF
+              python3 .github/scripts/format_aider_comment.py no_changes
               gh pr comment "$PR_NUM" --body-file "/tmp/pr_comment_${PR_NUM}.md" || true
             fi
 

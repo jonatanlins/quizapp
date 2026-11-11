@@ -1,5 +1,5 @@
-import React from 'react';
 import { Activity, ChevronDown } from 'lucide-react';
+import type React from 'react';
 
 interface HeaderBarProps {
   activeTab?: 'explore' | 'progress' | 'leaderboard';
@@ -24,7 +24,9 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ activeTab = 'explore' }) =
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
           <Activity size={14} color="#f5aa86" />
-          <strong style={{ fontSize: 11, color: '#f8f7f2', letterSpacing: '-0.2px' }}>Chaos bar</strong>
+          <strong style={{ fontSize: 11, color: '#f8f7f2', letterSpacing: '-0.2px' }}>
+            Chaos bar
+          </strong>
           <span style={{ color: '#c4c0b8', fontSize: 11 }}>Test how the app handles errors</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -123,7 +125,8 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ activeTab = 'explore' }) =
                 fontSize: 13,
                 fontWeight: 600,
                 color: activeTab === 'explore' ? '#25231f' : '#77746d',
-                borderBottom: activeTab === 'explore' ? '2px solid #25231f' : '2px solid transparent',
+                borderBottom:
+                  activeTab === 'explore' ? '2px solid #25231f' : '2px solid transparent',
                 padding: '22px 0 20px',
               }}
             >
@@ -134,7 +137,8 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ activeTab = 'explore' }) =
                 fontSize: 13,
                 fontWeight: 600,
                 color: activeTab === 'progress' ? '#25231f' : '#77746d',
-                borderBottom: activeTab === 'progress' ? '2px solid #25231f' : '2px solid transparent',
+                borderBottom:
+                  activeTab === 'progress' ? '2px solid #25231f' : '2px solid transparent',
                 padding: '22px 0 20px',
               }}
             >
@@ -145,7 +149,8 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({ activeTab = 'explore' }) =
                 fontSize: 13,
                 fontWeight: 600,
                 color: activeTab === 'leaderboard' ? '#25231f' : '#77746d',
-                borderBottom: activeTab === 'leaderboard' ? '2px solid #25231f' : '2px solid transparent',
+                borderBottom:
+                  activeTab === 'leaderboard' ? '2px solid #25231f' : '2px solid transparent',
                 padding: '22px 0 20px',
               }}
             >
