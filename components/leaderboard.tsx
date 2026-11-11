@@ -6,12 +6,20 @@ import { useQuiz } from '@/lib/client/store';
 import { Empty, ErrorBox, Loading } from './shared';
 
 export function Leaderboard() {
-  const s = useQuiz();
+  const board = useQuiz((s) => s.board);
+  const boardLoading = useQuiz((s) => s.boardLoading);
+  const boardError = useQuiz((s) => s.boardError);
+  const userId = useQuiz((s) => s.userId);
+  const loadBoard = useQuiz((s) => s.loadBoard);
+
   const [mode, setMode] = useState<'standard' | 'learn'>('standard');
+
   useEffect(() => {
-    void s.loadBoard();
-  }, []);
-  const rows = s.board?.[mode];
+    void loadBoard();
+  }, [loadBoard]);
+
+  const rows = board?.[mode];
+
   return (
     <div className="page-shell">
       <div className="page-title">
@@ -37,10 +45,10 @@ export function Leaderboard() {
           Learn mode
         </button>
       </div>
-      {s.boardLoading ? (
+      {boardLoading ? (
         <Loading text="Loading the leaderboard..." />
-      ) : s.boardError ? (
-        <ErrorBox text={s.boardError} retry={() => void s.loadBoard()} />
+      ) : boardError ? (
+        <ErrorBox text={boardError} retry={() => void loadBoard()} />
       ) : !rows?.length ? (
         <Empty title="The leaderboard is waiting">
           Complete a quiz to be the first on the board.
@@ -58,7 +66,7 @@ export function Leaderboard() {
               <div>
                 <strong>
                   {r.username}
-                  {r.userId === s.userId && <small> YOU</small>}
+                  {r.userId === userId && <small> YOU</small>}
                 </strong>
                 <p>
                   {r.attempts} {r.attempts === 1 ? 'quiz' : 'quizzes'} ·{' '}

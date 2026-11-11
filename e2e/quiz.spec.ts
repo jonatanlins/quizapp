@@ -27,7 +27,8 @@ test('quiz, Learn Mode, results, history, leaderboard and retake', async ({ page
     await page.getByRole('button', { name: i === 5 ? 'See my results' : 'Next question' }).click();
   }
   await expect(page.getByText('QUIZ COMPLETE')).toBeVisible();
-  const score = Number((await page.locator('.score-disc strong').innerText()).split('/')[0]);
+  const scoreText = (await page.locator('.score-disc strong').textContent()) ?? '';
+  const score = Number(scoreText.split('/')[0]);
   await expect(page.locator('.score-disc')).toContainText(`${score * 20}% CORRECT`);
   await page.getByRole('button', { name: 'My progress' }).click();
   await expect(page.getByText('Attempt history.')).toBeVisible();
@@ -48,7 +49,8 @@ test('quiz, Learn Mode, results, history, leaderboard and retake', async ({ page
     await page.getByRole('button', { name: i === 5 ? 'See my results' : 'Next question' }).click();
   }
   await expect(page.getByText('QUIZ COMPLETE')).toBeVisible();
-  const secondScore = Number((await page.locator('.score-disc strong').innerText()).split('/')[0]);
+  const secondScoreText = (await page.locator('.score-disc strong').textContent()) ?? '';
+  const secondScore = Number(secondScoreText.split('/')[0]);
   await page.getByRole('button', { name: 'My progress' }).click();
   await expect(page.locator('.history-row')).toHaveCount(2);
   await page.getByRole('button', { name: 'Leaderboard' }).click();
@@ -62,7 +64,7 @@ test('lost answer response survives refresh and does not allow another answer', 
   page,
 }) => {
   await startQuiz(page, 'E2E Recovery');
-  const question = await page.locator('.question-heading h2').innerText();
+  const question = (await page.locator('.question-heading h2').textContent()) ?? '';
   await page.locator('#chaos').selectOption('after');
   await page.locator('.option').first().click();
   await expect(page.locator('.notice.error')).toContainText('Simulated response loss');
@@ -103,7 +105,7 @@ test('same UTC daily challenge is shared and resumes after reload', async ({ bro
     for (let i = 1; i <= 3; i++) {
       await expect(first.getByLabel(`Question ${i} of 5`)).toBeVisible();
       await expect(second.locator('.question-heading h2')).toHaveText(
-        await first.locator('.question-heading h2').innerText()
+        (await first.locator('.question-heading h2').textContent()) ?? ''
       );
       if (i < 3) {
         await Promise.all([answerQuestion(first), answerQuestion(second)]);
@@ -116,7 +118,7 @@ test('same UTC daily challenge is shared and resumes after reload', async ({ bro
     await first.reload();
     await expect(first.getByLabel('Question 3 of 5')).toBeVisible();
     await expect(first.locator('.question-heading h2')).toHaveText(
-      await second.locator('.question-heading h2').innerText()
+      (await second.locator('.question-heading h2').textContent()) ?? ''
     );
   } finally {
     await a.close();
@@ -133,7 +135,7 @@ test('two tabs cannot answer the same question twice', async ({ context, page })
   await expect(page.locator('.feedback')).toBeVisible();
   await expect(other.locator('.feedback')).toBeVisible();
   await expect(page.locator('.option.correct span').nth(1)).toHaveText(
-    await other.locator('.option.correct span').nth(1).innerText()
+    (await other.locator('.option.correct span').nth(1).textContent()) ?? ''
   );
   await page.reload();
   await expect(page.locator('.feedback')).toBeVisible();

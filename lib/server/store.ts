@@ -1,15 +1,9 @@
 import { randomUUID, timingSafeEqual } from 'node:crypto';
+import { ApiError } from '@/lib/types';
 import { categories, dailyQuestions, type Question, questions, shuffled } from './questions';
 
-export class ApiError extends Error {
-  constructor(
-    public status: number,
-    public code: string,
-    message: string
-  ) {
-    super(message);
-  }
-}
+export { ApiError };
+
 type Answer = {
   questionId: string;
   selectedOptionId: string;
@@ -101,7 +95,8 @@ export function start(
   if (prior) {
     if (prior.payload !== payload)
       fail(409, 'IDEMPOTENCY_CONFLICT', 'This idempotency key was used for a different request.');
-    const s = store.sessions.get(prior.sessionId)!;
+    const s = store.sessions.get(prior.sessionId);
+    if (!s) return fail(404, 'SESSION_NOT_FOUND', 'Session not found or expired.');
     return { token: s.token, session: view(s) };
   }
   if (input.categoryId !== 'daily' && !categories.some((c) => c.id === input.categoryId))
@@ -118,9 +113,10 @@ export function start(
       text: option.text,
       correct: option.id === q.correctOptionId,
     }));
+    const correctOpt = options.find((o) => o.correct);
     return {
       ...q,
-      correctOptionId: options.find((o) => o.correct)!.id,
+      correctOptionId: correctOpt ? correctOpt.id : '',
       options: options.map(({ id, text }) => ({ id, text })),
     };
   });

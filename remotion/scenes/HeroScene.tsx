@@ -10,6 +10,45 @@ interface HeroSceneProps {
   selectedCard?: string;
 }
 
+const CARDS = [
+  {
+    id: 'fundamentals',
+    num: '01 / 06',
+    label: 'THE FOUNDATION',
+    title: 'AI Fundamentals',
+    desc: 'Core concepts behind modern AI systems.',
+    bg: '#e8e1f6',
+    borderColor: '#b8aec2',
+    iconColor: '#554b63',
+    Icon: BookOpen,
+  },
+  {
+    id: 'llm',
+    num: '02 / 06',
+    label: 'THE BUILDING BLOCKS',
+    title: 'LLM Applications',
+    desc: 'Design and evaluate language-model applications.',
+    bg: '#f6e2d5',
+    borderColor: '#c9aea0',
+    iconColor: '#744c34',
+    Icon: Sparkles,
+  },
+  {
+    id: 'agents',
+    num: '05 / 06',
+    label: 'THE AUTONOMY',
+    title: 'Autonomous Agents',
+    desc: 'Multi-step agents, planning loops, and tool-using systems.',
+    bg: '#dfece0',
+    borderColor: '#b2c6b3',
+    iconColor: '#365c3b',
+    labelColor: '#557257',
+    descColor: '#4a604c',
+    Icon: Bot,
+    hasAction: true,
+  },
+];
+
 export const HeroScene: React.FC<HeroSceneProps> = ({
   learnModeChecked,
   usernameText,
@@ -19,13 +58,11 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Scroll offset to pan smoothly from hero to topics
   const scrollY = interpolate(frame, [65, 110], [0, 240], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Hero entrance animation
   const heroEntrance = spring({
     frame,
     fps,
@@ -47,7 +84,6 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
     >
       <HeaderBar activeTab="explore" />
 
-      {/* Main scrollable body container */}
       <div
         style={{
           transform: `translateY(-${scrollY}px)`,
@@ -57,7 +93,6 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
           width: '100%',
         }}
       >
-        {/* Hero Section */}
         <div
           style={{
             maxWidth: 1140,
@@ -71,7 +106,6 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
             opacity: heroEntrance,
           }}
         >
-          {/* Left Hero Content */}
           <div>
             <div
               style={{
@@ -186,16 +220,15 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
             </div>
           </div>
 
-          {/* Right Hero Art Card */}
           <div
             style={{
               position: 'relative',
-              height: 250,
-              display: 'grid',
-              placeItems: 'center',
+              height: 280,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            {/* Orbits */}
             <div
               style={{
                 position: 'absolute',
@@ -214,32 +247,17 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 borderRadius: '50%',
               }}
             />
-
-            {/* Stars */}
             <div
-              style={{
-                position: 'absolute',
-                top: 20,
-                right: 50,
-                fontSize: 28,
-                color: '#9581bd',
-              }}
+              style={{ position: 'absolute', top: 20, right: 50, fontSize: 28, color: '#9581bd' }}
             >
               ✳
             </div>
             <div
-              style={{
-                position: 'absolute',
-                bottom: 30,
-                left: 40,
-                fontSize: 20,
-                color: '#d6a17b',
-              }}
+              style={{ position: 'absolute', bottom: 30, left: 40, fontSize: 20, color: '#d6a17b' }}
             >
               ✦
             </div>
 
-            {/* Lilac sheet */}
             <div
               style={{
                 width: 190,
@@ -258,93 +276,93 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  alignItems: 'center',
                   fontSize: 8,
                   fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  color: '#493e5a',
+                  letterSpacing: '0.1em',
+                  color: '#655778',
                 }}
               >
                 <span>YOUR DAILY DOSE OF</span>
-                <span style={{ fontSize: 16 }}>✳</span>
+                <span>✳</span>
               </div>
               <div
                 style={{
                   fontFamily: "Georgia, 'Times New Roman', serif",
+                  fontSize: 54,
+                  fontWeight: 400,
                   fontStyle: 'italic',
-                  fontSize: 68,
-                  lineHeight: 0.8,
-                  color: '#352e40',
-                  letterSpacing: '-0.07em',
-                  marginLeft: 4,
+                  color: '#28242e',
+                  lineHeight: 0.9,
                 }}
               >
-                aha<span style={{ color: '#8b73bd' }}>!</span>
+                aha<span style={{ color: '#e69869' }}>!</span>
               </div>
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  alignItems: 'center',
                   fontSize: 8,
                   fontWeight: 800,
-                  letterSpacing: '0.12em',
-                  color: '#493e5a',
+                  letterSpacing: '0.1em',
+                  color: '#655778',
+                  borderTop: '1px solid rgba(101,87,120,0.25)',
+                  paddingTop: 8,
                 }}
               >
                 <span>LEARN SOMETHING NEW</span>
-                <span style={{ fontSize: 14 }}>↗</span>
+                <span>↗</span>
               </div>
             </div>
 
-            {/* Art tag */}
             <div
               style={{
                 position: 'absolute',
-                bottom: 18,
+                bottom: 8,
                 right: 32,
-                backgroundColor: '#fffefa',
-                borderRadius: 5,
-                padding: '8px 12px',
-                boxShadow: '0 6px 18px rgba(57,52,47,0.1)',
+                backgroundColor: '#fff',
+                border: '1px solid #dfddd6',
+                borderRadius: 20,
+                padding: '6px 14px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 6,
-                fontSize: 9,
-                fontWeight: 800,
-                letterSpacing: '0.06em',
-                color: '#292824',
+                fontSize: 10,
+                fontWeight: 700,
+                color: '#34553b',
+                boxShadow: '0 6px 16px rgba(0,0,0,0.06)',
               }}
             >
-              <Check size={14} color="#5c986c" /> LITTLE WINS ADD UP
+              <Check size={14} color="#34553b" /> LITTLE WINS ADD UP
             </div>
           </div>
         </div>
 
-        {/* Setup preferences banner */}
+        {/* Setup Section */}
         <div
           style={{
-            borderTop: '1px solid #e5e3dc',
-            borderBottom: '1px solid #e5e3dc',
-            backgroundColor: '#fffefa',
-            padding: '18px 48px',
+            maxWidth: 1140,
+            width: '100%',
+            margin: '0 auto',
+            padding: '16px 48px',
           }}
         >
           <div
             style={{
-              maxWidth: 1140,
-              margin: '0 auto',
+              backgroundColor: '#fffefa',
+              border: '1px solid #e8e5de',
+              borderRadius: 8,
+              padding: '18px 24px',
               display: 'flex',
-              justifyContent: 'space-between',
               alignItems: 'center',
+              justifyContent: 'space-between',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.02)',
             }}
           >
             <div>
               <h2
                 style={{
                   fontFamily: "Georgia, 'Times New Roman', serif",
-                  fontSize: 22,
-                  letterSpacing: '-0.02em',
+                  fontSize: 20,
                   margin: 0,
                   color: '#24221f',
                 }}
@@ -357,7 +375,6 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
-              {/* Username Input */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4, minWidth: 200 }}>
                 <span
                   style={{
@@ -384,13 +401,11 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
                     style={{
                       borderRight: '2px solid #8a6dd5',
                       marginLeft: 2,
-                      animation: 'blink 1s infinite',
                     }}
                   />
                 </div>
               </div>
 
-              {/* Learn Mode Toggle */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <div>
                   <strong style={{ fontSize: 12, display: 'block', color: '#24221f' }}>
@@ -475,7 +490,6 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
             </span>
           </div>
 
-          {/* Cards Grid */}
           <div
             style={{
               display: 'grid',
@@ -483,203 +497,107 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
               gap: 16,
             }}
           >
-            {/* Card 1 */}
-            <div
-              style={{
-                backgroundColor: '#e8e1f6',
-                borderRadius: 6,
-                padding: 20,
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: 200,
-              }}
-            >
-              <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    border: '1px solid #b8aec2',
-                    display: 'grid',
-                    placeItems: 'center',
-                  }}
-                >
-                  <BookOpen size={20} color="#554b63" />
-                </div>
-                <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>01 / 06</span>
-              </div>
-              <div style={{ marginTop: 20 }}>
-                <span
-                  style={{
-                    fontSize: 9,
-                    fontWeight: 800,
-                    letterSpacing: '0.11em',
-                    color: '#716a76',
-                  }}
-                >
-                  THE FOUNDATION
-                </span>
-                <h3
-                  style={{
-                    fontFamily: "Georgia, 'Times New Roman', serif",
-                    fontSize: 21,
-                    letterSpacing: '-0.02em',
-                    margin: '6px 0',
-                    color: '#24221f',
-                  }}
-                >
-                  AI Fundamentals
-                </h3>
-                <p style={{ fontSize: 11, color: '#625d5e', margin: 0 }}>
-                  Core concepts behind modern AI systems.
-                </p>
-              </div>
-            </div>
+            {CARDS.map((card) => {
+              const isHovered = hoveredCard === card.id;
+              const isSelected = selectedCard === card.id;
+              const Icon = card.Icon;
 
-            {/* Card 2 */}
-            <div
-              style={{
-                backgroundColor: '#f6e2d5',
-                borderRadius: 6,
-                padding: 20,
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: 200,
-              }}
-            >
-              <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
+              return (
                 <div
+                  key={card.id}
                   style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    border: '1px solid #c9aea0',
-                    display: 'grid',
-                    placeItems: 'center',
+                    backgroundColor: card.bg,
+                    borderRadius: 6,
+                    padding: 20,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minHeight: 200,
+                    border: isHovered ? '2px solid #5a8d62' : '2px solid transparent',
+                    transform: isHovered ? 'translateY(-3px)' : 'none',
+                    boxShadow: isHovered ? '0 12px 24px rgba(45,85,52,0.15)' : 'none',
+                    transition: 'all 0.15s ease',
                   }}
                 >
-                  <Sparkles size={20} color="#744c34" />
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 38,
+                        height: 38,
+                        borderRadius: '50%',
+                        border: `1px solid ${card.borderColor}`,
+                        display: 'grid',
+                        placeItems: 'center',
+                        backgroundColor: isHovered ? '#c8decb' : 'transparent',
+                      }}
+                    >
+                      <Icon size={20} color={card.iconColor} />
+                    </div>
+                    <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>
+                      {card.num}
+                    </span>
+                  </div>
+                  <div style={{ marginTop: 20 }}>
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 800,
+                        letterSpacing: '0.11em',
+                        color: card.labelColor ?? '#716a76',
+                      }}
+                    >
+                      {card.label}
+                    </span>
+                    <h3
+                      style={{
+                        fontFamily: "Georgia, 'Times New Roman', serif",
+                        fontSize: 21,
+                        letterSpacing: '-0.02em',
+                        margin: '6px 0',
+                        color: '#24221f',
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    <p style={{ fontSize: 11, color: card.descColor ?? '#625d5e', margin: 0 }}>
+                      {card.desc}
+                    </p>
+                  </div>
+                  {card.hasAction && (
+                    <div
+                      style={{
+                        marginTop: 'auto',
+                        paddingTop: 16,
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <span style={{ fontSize: 11, color: '#536955' }}>5 questions · ~3 min</span>
+                      <div
+                        style={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: '50%',
+                          backgroundColor: isSelected ? '#5a8d62' : '#292824',
+                          color: '#fff',
+                          display: 'grid',
+                          placeItems: 'center',
+                          transform: isSelected ? 'scale(0.92)' : 'none',
+                        }}
+                      >
+                        <ArrowRight size={16} />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>02 / 06</span>
-              </div>
-              <div style={{ marginTop: 20 }}>
-                <span
-                  style={{
-                    fontSize: 9,
-                    fontWeight: 800,
-                    letterSpacing: '0.11em',
-                    color: '#716a76',
-                  }}
-                >
-                  THE BUILDING BLOCKS
-                </span>
-                <h3
-                  style={{
-                    fontFamily: "Georgia, 'Times New Roman', serif",
-                    fontSize: 21,
-                    letterSpacing: '-0.02em',
-                    margin: '6px 0',
-                    color: '#24221f',
-                  }}
-                >
-                  LLM Applications
-                </h3>
-                <p style={{ fontSize: 11, color: '#625d5e', margin: 0 }}>
-                  Design and evaluate language-model applications.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3: Autonomous Agents (Hovered & Clicked) */}
-            <div
-              style={{
-                backgroundColor: '#dfece0',
-                borderRadius: 6,
-                padding: 20,
-                display: 'flex',
-                flexDirection: 'column',
-                minHeight: 200,
-                border: hoveredCard === 'agents' ? '2px solid #5a8d62' : '2px solid transparent',
-                transform: hoveredCard === 'agents' ? 'translateY(-3px)' : 'none',
-                boxShadow: hoveredCard === 'agents' ? '0 12px 24px rgba(45,85,52,0.15)' : 'none',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <div
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: '50%',
-                    border: '1px solid #b2c6b3',
-                    display: 'grid',
-                    placeItems: 'center',
-                    backgroundColor: hoveredCard === 'agents' ? '#c8decb' : 'transparent',
-                  }}
-                >
-                  <Bot size={20} color="#365c3b" />
-                </div>
-                <span style={{ fontSize: 10, color: '#746e72', fontWeight: 600 }}>05 / 06</span>
-              </div>
-              <div style={{ marginTop: 20 }}>
-                <span
-                  style={{
-                    fontSize: 9,
-                    fontWeight: 800,
-                    letterSpacing: '0.11em',
-                    color: '#557257',
-                  }}
-                >
-                  THE AUTONOMY
-                </span>
-                <h3
-                  style={{
-                    fontFamily: "Georgia, 'Times New Roman', serif",
-                    fontSize: 21,
-                    letterSpacing: '-0.02em',
-                    margin: '6px 0',
-                    color: '#24221f',
-                  }}
-                >
-                  Autonomous Agents
-                </h3>
-                <p style={{ fontSize: 11, color: '#4a604c', margin: 0 }}>
-                  Multi-step agents, planning loops, and tool-using systems.
-                </p>
-              </div>
-              <div
-                style={{
-                  marginTop: 'auto',
-                  paddingTop: 16,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <span style={{ fontSize: 11, color: '#536955' }}>5 questions · ~3 min</span>
-                <div
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: '50%',
-                    backgroundColor: selectedCard === 'agents' ? '#5a8d62' : '#292824',
-                    color: '#fff',
-                    display: 'grid',
-                    placeItems: 'center',
-                    transform: selectedCard === 'agents' ? 'scale(0.92)' : 'none',
-                  }}
-                >
-                  <ArrowRight size={16} />
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

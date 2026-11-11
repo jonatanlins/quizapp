@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Sparkles, X } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import type React from 'react';
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion';
 import { HeaderBar } from '../components/HeaderBar';
@@ -11,24 +11,43 @@ interface QuizSceneProps {
   nextButtonClicked?: boolean;
 }
 
+const OPTIONS = [
+  {
+    letter: 'A',
+    key: 'a',
+    text: 'Interleaving thought generation with action execution and observation retrieval in a loop',
+    isCorrectOption: true,
+  },
+  {
+    letter: 'B',
+    key: 'b',
+    text: 'Generating all thoughts upfront before executing any actions',
+    isCorrectOption: false,
+  },
+  {
+    letter: 'C',
+    key: 'c',
+    text: 'Replacing neural networks with hardcoded symbolic rule engines',
+    isCorrectOption: false,
+  },
+];
+
 export const QuizScene: React.FC<QuizSceneProps> = ({
   selectedOption,
   isAnswered = false,
-  isCorrect = true,
+  isCorrect: _isCorrect = true,
   nextButtonHovered = false,
   nextButtonClicked = false,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Entrance spring animation
   const sceneEntrance = spring({
     frame,
     fps,
     config: { damping: 15, mass: 0.9 },
   });
 
-  // Feedback card slide-in animation
   const feedbackEntrance = spring({
     frame: Math.max(0, frame - 10),
     fps,
@@ -50,7 +69,6 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
     >
       <HeaderBar activeTab="explore" />
 
-      {/* Main Quiz Area */}
       <div
         style={{
           maxWidth: 820,
@@ -63,7 +81,6 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
           transform: `translateY(${interpolate(sceneEntrance, [0, 1], [20, 0])}px)`,
         }}
       >
-        {/* Breadcrumb */}
         <div
           style={{
             display: 'flex',
@@ -79,7 +96,6 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
           <span style={{ color: '#6549bd' }}>Learn mode</span>
         </div>
 
-        {/* Quiz Header */}
         <div
           style={{
             display: 'flex',
@@ -103,78 +119,66 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
             <h1
               style={{
                 fontFamily: "Georgia, 'Times New Roman', serif",
-                fontSize: 34,
-                fontWeight: 400,
-                margin: '4px 0 0',
+                fontSize: 32,
+                letterSpacing: '-0.025em',
+                margin: '2px 0 0',
                 color: '#24221f',
               }}
             >
               Let’s find out<span style={{ color: '#a38bd3' }}>.</span>
             </h1>
           </div>
-          <div style={{ fontSize: 13, color: '#a49f96' }}>
-            <strong
-              style={{
-                fontFamily: "Georgia, 'Times New Roman', serif",
-                fontSize: 28,
-                color: '#292824',
-              }}
-            >
-              01
-            </strong>
-            <span> / 05</span>
+          <div style={{ fontSize: 13, color: '#777168' }}>
+            <strong style={{ fontSize: 24, color: '#24221f' }}>01</strong> / 05
           </div>
         </div>
 
-        {/* Progress Track */}
         <div
           style={{
             height: 4,
-            borderRadius: 4,
-            backgroundColor: '#e7e3dc',
+            backgroundColor: '#e7e5dc',
+            borderRadius: 2,
+            marginBottom: 20,
             overflow: 'hidden',
-            width: '100%',
           }}
         >
           <div
             style={{
               height: '100%',
               width: '20%',
-              backgroundColor: '#a994d8',
-              borderRadius: 4,
+              backgroundColor: '#8a72bc',
+              borderRadius: 2,
             }}
           />
         </div>
 
-        {/* Question Panel */}
         <div
           style={{
-            marginTop: 18,
             backgroundColor: '#fffefa',
             border: '1px solid #e8e5de',
             borderRadius: 10,
             padding: '24px 28px',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.03)',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.03)',
           }}
         >
-          {/* Question Heading */}
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-            <span
+            <div
               style={{
-                flex: 'none',
-                width: 28,
-                height: 28,
+                width: 26,
+                height: 26,
+                borderRadius: '50%',
+                backgroundColor: '#f1edf9',
+                color: '#725a9f',
                 display: 'grid',
                 placeItems: 'center',
-                backgroundColor: '#e9e1f5',
-                borderRadius: '50%',
-                fontFamily: "Georgia, 'Times New Roman', serif",
-                fontSize: 18,
-                color: '#705b94',
+                fontWeight: 800,
+                fontSize: 14,
+                flexShrink: 0,
+                marginTop: 2,
               }}
             >
               ?
-            </span>
+            </div>
             <h2
               style={{
                 fontFamily: "Georgia, 'Times New Roman', serif",
@@ -189,7 +193,6 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
             </h2>
           </div>
 
-          {/* Learn Note */}
           <div
             style={{
               display: 'flex',
@@ -215,127 +218,66 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
             </div>
           </div>
 
-          {/* Options */}
           <div style={{ display: 'grid', gap: 8 }}>
-            {/* Option A */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                border: isAnswered
+            {OPTIONS.map((opt) => {
+              const isSelected = selectedOption === opt.key;
+              const isThisCorrect = opt.isCorrectOption;
+
+              const border =
+                isAnswered && isThisCorrect
                   ? '1.5px solid #7ba986'
-                  : selectedOption === 'a'
+                  : isSelected
                     ? '1.5px solid #8a72bc'
-                    : '1px solid #dfddd6',
-                borderRadius: 6,
-                backgroundColor: isAnswered
-                  ? '#eef7ef'
-                  : selectedOption === 'a'
-                    ? '#fbf9fe'
-                    : '#fffefa',
-                padding: '10px 14px',
-                fontSize: 12,
-                color: isAnswered ? '#325e3a' : '#24221f',
-                fontWeight: isAnswered ? 600 : 400,
-                boxShadow: isAnswered ? '0 2px 8px rgba(50,94,58,0.08)' : 'none',
-              }}
-            >
-              <span
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 4,
-                  display: 'grid',
-                  placeItems: 'center',
-                  backgroundColor: isAnswered ? '#d9ecd8' : '#f1f0ea',
-                  fontWeight: 700,
-                  fontSize: 10,
-                  color: isAnswered ? '#254e2c' : '#555',
-                  flexShrink: 0,
-                }}
-              >
-                A
-              </span>
-              <span style={{ flex: 1 }}>
-                Interleaving thought generation with action execution and observation retrieval in a
-                loop
-              </span>
-              {isAnswered && <CheckCircle2 size={18} color="#3b744a" />}
-            </div>
+                    : '1px solid #dfddd6';
 
-            {/* Option B */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                border: '1px solid #dfddd6',
-                borderRadius: 6,
-                backgroundColor: '#fffefa',
-                padding: '10px 14px',
-                fontSize: 12,
-                color: '#666',
-                opacity: isAnswered ? 0.6 : 1,
-              }}
-            >
-              <span
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 4,
-                  display: 'grid',
-                  placeItems: 'center',
-                  backgroundColor: '#f1f0ea',
-                  fontWeight: 700,
-                  fontSize: 10,
-                  flexShrink: 0,
-                }}
-              >
-                B
-              </span>
-              <span style={{ flex: 1 }}>
-                Generating all thoughts upfront before executing any actions
-              </span>
-            </div>
+              const bg =
+                isAnswered && isThisCorrect ? '#eef7ef' : isSelected ? '#fbf9fe' : '#fffefa';
 
-            {/* Option C */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                border: '1px solid #dfddd6',
-                borderRadius: 6,
-                backgroundColor: '#fffefa',
-                padding: '10px 14px',
-                fontSize: 12,
-                color: '#666',
-                opacity: isAnswered ? 0.6 : 1,
-              }}
-            >
-              <span
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 4,
-                  display: 'grid',
-                  placeItems: 'center',
-                  backgroundColor: '#f1f0ea',
-                  fontWeight: 700,
-                  fontSize: 10,
-                  flexShrink: 0,
-                }}
-              >
-                C
-              </span>
-              <span style={{ flex: 1 }}>
-                Replacing neural networks with hardcoded symbolic rule engines
-              </span>
-            </div>
+              const color = isAnswered && isThisCorrect ? '#325e3a' : '#24221f';
+              const opacity = isAnswered && !isThisCorrect ? 0.6 : 1;
+
+              return (
+                <div
+                  key={opt.key}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    border,
+                    borderRadius: 6,
+                    backgroundColor: bg,
+                    padding: '10px 14px',
+                    fontSize: 12,
+                    color,
+                    fontWeight: isAnswered && isThisCorrect ? 600 : 400,
+                    opacity,
+                    boxShadow:
+                      isAnswered && isThisCorrect ? '0 2px 8px rgba(50,94,58,0.08)' : 'none',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 4,
+                      display: 'grid',
+                      placeItems: 'center',
+                      backgroundColor: isAnswered && isThisCorrect ? '#d9ecd8' : '#f1f0ea',
+                      fontWeight: 700,
+                      fontSize: 10,
+                      color: isAnswered && isThisCorrect ? '#254e2c' : '#555',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {opt.letter}
+                  </span>
+                  <span style={{ flex: 1 }}>{opt.text}</span>
+                  {isAnswered && isThisCorrect && <CheckCircle2 size={18} color="#3b744a" />}
+                </div>
+              );
+            })}
           </div>
 
-          {/* Feedback Section */}
           {isAnswered && (
             <div
               style={{
@@ -359,35 +301,34 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
                   fontWeight: 700,
                 }}
               >
-                <CheckCircle2 size={18} color="#315a39" />
-                <span>That’s right!</span>
+                <CheckCircle2 size={16} color="#315a39" /> That’s right!
               </div>
-              <p style={{ margin: '6px 0 12px', lineHeight: 1.5, fontSize: 11.5 }}>
-                ReAct prompts the model to generate reasoning traces (&apos;Thoughts&apos;) followed
-                by tool actions (&apos;Actions&apos;) and environment feedback
-                (&apos;Observations&apos;).
+              <p style={{ margin: '4px 0 12px', lineHeight: 1.45 }}>
+                ReAct explicitly synergizes action execution with reasoning traces, enabling an
+                agent to dynamically create, maintain, and adjust plans of action while interacting
+                with external tools.
               </p>
               <div
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: 12,
+                  gap: 6,
                   backgroundColor: '#292824',
                   color: '#fff',
                   borderRadius: 6,
-                  padding: '9px 15px',
+                  padding: '8px 14px',
+                  fontWeight: 600,
                   fontSize: 11,
-                  fontWeight: 700,
                   transform: nextButtonClicked
-                    ? 'scale(0.95)'
+                    ? 'scale(0.96)'
                     : nextButtonHovered
                       ? 'translateY(-1px)'
                       : 'none',
                   boxShadow: nextButtonHovered ? '0 4px 12px rgba(0,0,0,0.15)' : 'none',
-                  cursor: 'pointer',
+                  transition: 'all 0.1s ease',
                 }}
               >
-                <span>See my results</span>
+                <span>Next question</span>
                 <ArrowRight size={14} />
               </div>
             </div>

@@ -71,7 +71,9 @@ test('pending answers persist before sending, lock rapid clicks, and replay the 
     });
     api.answer = async (_id, _token, payload, key) => {
       sends++;
-      const persisted = JSON.parse(memory.get('quizapp:v1')!);
+      const raw = memory.get('quizapp:v1');
+      assert.ok(raw);
+      const persisted = JSON.parse(raw);
       assert.equal(persisted.pending.key, key);
       assert.deepEqual(persisted.pending.payload, payload);
       if (sends === 1) {
@@ -91,7 +93,9 @@ test('pending answers persist before sending, lock rapid clicks, and replay the 
     assert.equal(useQuiz.getState().pending?.kind, 'answer');
     assert.match(useQuiz.getState().error ?? '', /Lost response/);
     // Simulate a new client instance restoring only serialized state.
-    const saved = JSON.parse(memory.get('quizapp:v1')!);
+    const rawSaved = memory.get('quizapp:v1');
+    assert.ok(rawSaved);
+    const saved = JSON.parse(rawSaved);
     useQuiz.setState({ ...saved, session: null, busy: false, error: null });
     await useQuiz.getState().recover();
     assert.equal(sends, 2);

@@ -13,18 +13,22 @@ import type { Tab } from './types';
 
 export default function QuizApp() {
   const s = useQuiz();
+  const hydrate = useQuiz((state) => state.hydrate);
   const [tab, setTab] = useState<Tab>('explore');
+
   useEffect(() => {
-    s.hydrate();
+    hydrate();
     const listener = (e: StorageEvent) => {
       if (e.key === 'quizapp:v1') useQuiz.getState().sync();
     };
     window.addEventListener('storage', listener);
     return () => window.removeEventListener('storage', listener);
-  }, []);
+  }, [hydrate]);
+
   const change = (next: Tab) => setTab(next);
   const showQuiz =
     tab === 'explore' && (!!s.session || !!s.pending || (!!s.active && !s.expired) || s.busy);
+
   return (
     <>
       <Header tab={tab} change={change} />

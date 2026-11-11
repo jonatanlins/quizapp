@@ -1,67 +1,18 @@
-import { z } from 'zod';
 import { create } from 'zustand';
+import { ApiError, api, type Category, type Chaos, type Leaderboard, type Session } from './api';
 import {
-  ApiError,
-  api,
-  type Category,
-  type Chaos,
-  type Leaderboard,
-  type Result,
-  resultSchema,
-  type Session,
-  type StartPayload,
-} from './api';
+  initialStored,
+  type Pending,
+  readStored,
+  STORAGE_KEY,
+  type Stored,
+  storedSchema,
+  writeStored,
+} from './storage';
 
-const KEY = 'quizapp:v1';
-type Pending =
-  | { kind: 'start'; key: string; payload: StartPayload }
-  | { kind: 'answer'; key: string; payload: { questionId: string; optionId: string } }
-  | { kind: 'advance'; questionId: string };
-type Stored = {
-  userId: string;
-  username: string;
-  learnMode: boolean;
-  active: { id: string; token: string } | null;
-  pending: Pending | null;
-  history: Result[];
-};
-const uuid = z.string().uuid();
-const pendingSchema = z.discriminatedUnion('kind', [
-  z.object({
-    kind: z.literal('start'),
-    key: uuid,
-    payload: z.object({
-      categoryId: z.string(),
-      userId: uuid,
-      username: z.string(),
-      learnMode: z.boolean(),
-    }),
-  }),
-  z.object({
-    kind: z.literal('answer'),
-    key: uuid,
-    payload: z.object({ questionId: z.string(), optionId: uuid }),
-  }),
-  z.object({ kind: z.literal('advance'), questionId: z.string() }),
-]);
-const storedSchema = z.object({
-  userId: uuid,
-  username: z.string(),
-  learnMode: z.boolean(),
-  active: z.object({ id: uuid, token: z.string() }).nullable(),
-  pending: pendingSchema.nullable(),
-  history: z.array(resultSchema),
-});
-const initial = (): Stored => ({
-  userId: crypto.randomUUID(),
-  username: '',
-  learnMode: false,
-  active: null,
-  pending: null,
-  history: [],
-});
 let lock = false;
 let syncRequested = false;
+
 type State = Stored & {
   hydrated: boolean;
   storageError: string | null;
@@ -91,32 +42,23 @@ type State = Stored & {
   clearHistory: () => void;
   resetStorage: () => void;
 };
+
 const errorText = (e: unknown) =>
   e instanceof Error ? e.message : 'Something went wrong. Please try again.';
+
 export const useQuiz = create<State>((set, get) => {
   const save = (patch: Partial<Stored>): boolean => {
-    const s = get();
-    const next: Stored = {
-      userId: s.userId,
-      username: s.username,
-      learnMode: s.learnMode,
-      active: s.active,
-      pending: s.pending,
-      history: s.history,
-      ...patch,
-    };
-    try {
-      localStorage.setItem(KEY, JSON.stringify(next));
-      set({ ...next, storageError: null });
-      return true;
-    } catch {
-      set({
-        ...next,
-        storageError: 'Browser storage is unavailable. Progress may not survive a refresh.',
-      });
-      return false;
-    }
+    const next: Stored = { ...get(), ...patch };
+    const success = writeStored(next);
+    set({
+      ...next,
+      storageError: success
+        ? null
+        : 'Browser storage is unavailable. Progress may not survive a refresh.',
+    });
+    return success;
   };
+
   const accept = (session: Session, active?: Stored['active']) => {
     const history =
       session.state === 'completed'
@@ -125,6 +67,7 @@ export const useQuiz = create<State>((set, get) => {
     save({ ...(active !== undefined ? { active } : {}), pending: null, history });
     set({ session, error: null, expired: false });
   };
+
   const run = async (operation: () => Promise<void>) => {
     if (lock) return;
     lock = true;
@@ -148,12 +91,14 @@ export const useQuiz = create<State>((set, get) => {
       }
     }
   };
+
   const performPending = async () => {
     const { pending, active, chaos } = get();
-    if (pending && !save({ pending }))
+    if (pending && !save({ pending })) {
       throw new Error(
         'Could not save the pending request. Enable browser storage before retrying.'
       );
+    }
     if (!pending) {
       if (active) accept(await api.session(active.id, active.token, chaos));
       return;
@@ -169,7 +114,6 @@ export const useQuiz = create<State>((set, get) => {
         pending.kind === 'answer'
           ? await api.answer(active.id, active.token, pending.payload, pending.key, chaos)
           : await api.advance(active.id, active.token, pending.questionId, chaos);
-      // Another tab may have advanced since an idempotent answer was first accepted.
       if (pending.kind === 'answer') accept(await api.session(active.id, active.token, chaos));
       else accept(result);
     } catch (e) {
@@ -180,8 +124,14 @@ export const useQuiz = create<State>((set, get) => {
       throw e;
     }
   };
+
+  const queuePending = async (pending: Pending, errorMsg: string) => {
+    if (!save({ pending })) throw new Error(errorMsg);
+    await performPending();
+  };
+
   return {
-    ...initial(),
+    ...initialStored(),
     hydrated: false,
     storageError: null,
     chaos: 'off',
@@ -197,23 +147,9 @@ export const useQuiz = create<State>((set, get) => {
     expired: false,
     hydrate: () => {
       if (get().hydrated) return;
-      try {
-        const raw = localStorage.getItem(KEY);
-        if (raw) {
-          const data = storedSchema.safeParse(JSON.parse(raw));
-          if (data.success) set(data.data);
-          else
-            set({
-              storageError:
-                'Saved progress is invalid and could not be restored. You can clear it and start again.',
-            });
-        }
-      } catch {
-        set({
-          storageError:
-            'Browser storage is unavailable or contains invalid data. Progress may not survive a refresh.',
-        });
-      }
+      const { data, error } = readStored();
+      if (data) set(data);
+      else if (error) set({ storageError: error });
       set({ hydrated: true });
       void get().loadCategories();
       if (get().active || get().pending) void get().recover();
@@ -224,7 +160,7 @@ export const useQuiz = create<State>((set, get) => {
         return;
       }
       try {
-        const raw = localStorage.getItem(KEY);
+        const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return;
         const data = storedSchema.safeParse(JSON.parse(raw));
         if (data.success) {
@@ -273,40 +209,36 @@ export const useQuiz = create<State>((set, get) => {
         const username = s.username.trim();
         if (!username) throw new Error('Enter a username to start.');
         if (s.pending) throw new Error('Finish recovering the previous request first.');
-        const pending: Pending = {
-          kind: 'start',
-          key: crypto.randomUUID(),
-          payload: { categoryId, userId: s.userId, username, learnMode: s.learnMode },
-        };
-        if (!save({ pending }))
-          throw new Error('Could not save this request. Enable browser storage to start safely.');
-        await performPending();
+        await queuePending(
+          {
+            kind: 'start',
+            key: crypto.randomUUID(),
+            payload: { categoryId, userId: s.userId, username, learnMode: s.learnMode },
+          },
+          'Could not save this request. Enable browser storage to start safely.'
+        );
       }),
     answer: async (optionId) =>
       run(async () => {
         const s = get();
-        if (!s.session || s.session.state !== 'question_ready' || s.pending) return;
-        const pending: Pending = {
-          kind: 'answer',
-          key: crypto.randomUUID(),
-          payload: { questionId: s.session.question.id, optionId },
-        };
-        if (!save({ pending }))
-          throw new Error(
-            'Could not save your answer safely. Enable browser storage and try again.'
-          );
-        await performPending();
+        if (s.session?.state !== 'question_ready' || s.pending) return;
+        await queuePending(
+          {
+            kind: 'answer',
+            key: crypto.randomUUID(),
+            payload: { questionId: s.session.question.id, optionId },
+          },
+          'Could not save your answer safely. Enable browser storage and try again.'
+        );
       }),
     advance: async () =>
       run(async () => {
         const s = get();
-        if (!s.session || s.session.state !== 'feedback' || s.pending) return;
-        const pending: Pending = { kind: 'advance', questionId: s.session.question.id };
-        if (!save({ pending }))
-          throw new Error(
-            'Could not save your progress safely. Enable browser storage and try again.'
-          );
-        await performPending();
+        if (s.session?.state !== 'feedback' || s.pending) return;
+        await queuePending(
+          { kind: 'advance', questionId: s.session.question.id },
+          'Could not save your progress safely. Enable browser storage and try again.'
+        );
       }),
     recover: async () => run(performPending),
     reset: () => {
@@ -321,11 +253,10 @@ export const useQuiz = create<State>((set, get) => {
     },
     resetStorage: () => {
       if (get().busy) return;
-      const fresh = initial();
-      try {
-        localStorage.setItem(KEY, JSON.stringify(fresh));
+      const fresh = initialStored();
+      if (writeStored(fresh)) {
         set({ ...fresh, session: null, error: null, expired: false, storageError: null });
-      } catch {
+      } else {
         set({ storageError: 'Browser storage is unavailable. Enable it to save your progress.' });
       }
     },

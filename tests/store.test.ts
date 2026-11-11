@@ -69,7 +69,9 @@ it('persists preferences, loads categories and leaderboard, and exposes errors',
   useQuiz.getState().setName(' Ada ');
   useQuiz.getState().setLearn(true);
   useQuiz.getState().setChaos('after');
-  expect(JSON.parse(data.get('quizapp:v1')!).username).toBe(' Ada ');
+  const raw = data.get('quizapp:v1');
+  expect(raw).toBeDefined();
+  expect(JSON.parse(raw as string).username).toBe(' Ada ');
   expect(useQuiz.getState().learnMode).toBe(true);
   expect(useQuiz.getState().chaos).toBe('after');
   await useQuiz.getState().loadCategories();

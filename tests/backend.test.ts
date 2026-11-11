@@ -72,7 +72,8 @@ test('session enforces state, idempotency, question privacy and completion scori
   assert.equal(complete.state, 'completed');
   assert.ok('results' in complete);
   assert.equal(complete.results.total, 5);
-  const row = leaderboard().standard.find((r) => r.userId === userId)!;
+  const row = leaderboard().standard.find((r) => r.userId === userId);
+  assert.ok(row);
   assert.equal(row.attempts, 1);
   assert.equal(row.correct, complete.results.score);
   const second = start(input, randomUUID());
@@ -82,7 +83,8 @@ test('session enforces state, idempotency, question privacy and completion scori
     answer(again, { questionId: q.id, optionId: q.correctOptionId }, randomUUID());
     advance(again, q.id);
   }
-  const total = leaderboard().standard.find((r) => r.userId === userId)!;
+  const total = leaderboard().standard.find((r) => r.userId === userId);
+  assert.ok(total);
   assert.equal(total.attempts, 2);
   assert.equal(total.correct, complete.results.score + 5);
 });
@@ -243,15 +245,15 @@ test('daily API validates errors, advances safely and keeps answers private', as
   };
   const [missing, wrongToken, answerResponse] = await Promise.all([
     GET(
-      new Request('http://localhost/api/sessions/' + session.id + '/missing', { headers }),
+      new Request(`http://localhost/api/sessions/${session.id}/missing`, { headers }),
       context(['sessions', session.id, 'missing'])
     ),
     GET(
-      new Request('http://localhost/api/sessions/' + session.id),
+      new Request(`http://localhost/api/sessions/${session.id}`),
       context(['sessions', session.id])
     ),
     POST(
-      new Request('http://localhost/api/sessions/' + session.id + '/answers', {
+      new Request(`http://localhost/api/sessions/${session.id}/answers`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -266,7 +268,7 @@ test('daily API validates errors, advances safely and keeps answers private', as
   assert.equal(wrongToken.status, 404);
   assert.equal(answerResponse.status, 200);
   const next = await POST(
-    new Request('http://localhost/api/sessions/' + session.id + '/advance', {
+    new Request(`http://localhost/api/sessions/${session.id}/advance`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ questionId: session.question.id }),
@@ -348,8 +350,8 @@ test('server rejects unknown categories, questions, and options, and reports int
   );
   for (let i = 0; i < 5; i++) {
     const q = s.questions[i];
-    const chosen =
-      i < 3 ? q.correctOptionId : q.options.find((o) => o.id !== q.correctOptionId)!.id;
+    const wrongOpt = q.options.find((o) => o.id !== q.correctOptionId);
+    const chosen = i < 3 ? q.correctOptionId : wrongOpt ? wrongOpt.id : '';
     answer(s, { questionId: q.id, optionId: chosen }, randomUUID());
     advance(s, q.id);
   }
@@ -363,11 +365,8 @@ test('server rejects unknown categories, questions, and options, and reports int
   const sLow = getSession(low.session.id, low.token);
   for (let i = 0; i < 5; i++) {
     const q = sLow.questions[i];
-    answer(
-      sLow,
-      { questionId: q.id, optionId: q.options.find((o) => o.id !== q.correctOptionId)!.id },
-      randomUUID()
-    );
+    const wrongOpt = q.options.find((o) => o.id !== q.correctOptionId);
+    answer(sLow, { questionId: q.id, optionId: wrongOpt ? wrongOpt.id : '' }, randomUUID());
     advance(sLow, q.id);
   }
   const lowFinished = view(sLow);
