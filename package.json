@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "video:render": "remotion render remotion/index.ts QuizAppDemo public/demo.mp4",
+    "video:render": "remotion render remotion/index.ts QuizAppDemo public/demo.gif",
     "video:preview": "remotion studio remotion/index.ts",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
