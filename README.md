@@ -101,4 +101,8 @@ Triggered on every `push` to `main` and on pull requests:
 - **Git Pre-commit Hook**: Managed with [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/lint-staged/lint-staged). Staged files are automatically formatted and verified in milliseconds on `git commit`.
 - **Configuration**: Settings for code style, quotes, indentation, and rules are located in [`biome.json`](biome.json).
 
+## License
+
+[MIT](LICENSE) © 2026 Jonatan Lins
+
 
